@@ -1,0 +1,255 @@
+# 나컴퍼니 관리자 화면 설정
+# 저장소: seoosea/nacompany-site
+
+backend:
+  name: github
+  repo: seoosea/nacompany-site
+  branch: main
+  auth_methods: [token]
+  commit_messages:
+    create: "기사 추가: {{slug}}"
+    update: "기사 수정: {{slug}}"
+    delete: "기사 삭제: {{slug}}"
+    uploadMedia: "사진 올림: {{path}}"
+    deleteMedia: "사진 지움: {{path}}"
+
+site_url: https://playsteam.co.kr
+display_url: https://playsteam.co.kr
+
+media_folder: src/assets/uploads
+public_folder: /assets/uploads
+
+# 사진을 올리면 자동으로 가로 1600px 이하, 가벼운 형식(webp)으로 줄여 저장합니다.
+media_libraries:
+  default:
+    config:
+      max_file_size: 20000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 1600
+
+slug:
+  encoding: unicode
+  clean_accents: false
+
+collections:
+  # ───────────────────────── PLAYSTEAM 기사 ─────────────────────────
+  - name: articles
+    label: PLAYSTEAM 기사
+    label_singular: 기사
+    description: 기사를 쓰고 "공개"를 켠 채 저장하면 몇 분 뒤 홈페이지에 나타납니다.
+    folder: src/playsteam/articles
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}{{month}}{{day}}-{{hour}}{{minute}}"
+    preview_path: "playsteam/{{slug}}/"
+    summary: "{{issue}} · {{title}}"
+    sortable_fields: [date, title, issue]
+    view_groups:
+      - { label: 호수별, field: issue }
+      - { label: 코너별, field: corner }
+    fields:
+      - { name: title, label: 제목, widget: string, maxlength: 24, hint: "24자 이내" }
+      - name: issue
+        label: 호수
+        widget: string
+        default: "2026 Vol.03"
+        hint: '예: 2026 Vol.03 — 같은 호 기사는 글자를 똑같이 써 주세요'
+      - name: corner
+        label: 코너
+        widget: select
+        options: ["What's New", "Special Class", "Editor's Pick", "Update"]
+        default: "What's New"
+      - name: category
+        label: 분류
+        widget: select
+        options: [기관 교육, 대회, 수업, 학원 소식, 교육 기술]
+      - name: region
+        label: 지역
+        widget: select
+        options: [울산, 대전, 충남, 온라인, 기타]
+        required: false
+      - { name: date, label: 날짜, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - { name: published, label: 공개, widget: boolean, default: true, hint: "끄면 홈페이지에 보이지 않습니다 (임시 저장)" }
+      - { name: summary, label: 요약, widget: string, maxlength: 50, required: false, hint: "목록 카드에 보이는 한 줄 · 50자 이내" }
+      - { name: pdf, label: 소식지 PDF (선택), widget: file, required: false, hint: "이 기사가 실린 소식지 PDF를 올리면 기사 아래에 버튼이 생깁니다" }
+      - name: block
+        label: 레이아웃과 내용
+        widget: object
+        typeKey: type
+        hint: "레이아웃을 먼저 고르면, 그 레이아웃에 맞는 칸이 나타납니다"
+        types:
+          - name: big
+            label: 큰 사진 — 대회 수상, 큰 행사
+            widget: object
+            fields:
+              - name: photos
+                label: 사진 (1장)
+                widget: list
+                min: 1
+                max: 1
+                fields:
+                  - &src { name: src, label: 사진, widget: image }
+                  - &focus { name: focus, label: 잘릴 때 보일 부분, widget: select, options: [{ label: 위, value: top }, { label: 가운데, value: center }, { label: 아래, value: bottom }], default: center, hint: "얼굴이 잘리면 바꿔 보세요" }
+                  - &alt { name: alt, label: 사진 설명, widget: string, required: false, hint: "눈이 불편한 분과 검색엔진을 위한 한 줄 (예: 대회장에서 로봇을 조정하는 학생들)" }
+              - { name: body, label: 본문, widget: text, maxlength: 400, hint: "400자 이내 · 빈 줄을 넣으면 새 문단" }
+          - name: trio
+            label: 사진 3장 — 행사 현장
+            widget: object
+            fields:
+              - name: photos
+                label: 사진 (3장)
+                widget: list
+                min: 3
+                max: 3
+                hint: "첫 번째 사진이 크게 보입니다"
+                fields: [*src, *focus, *alt]
+              - { name: body, label: 본문, widget: text, maxlength: 250, hint: "250자 이내" }
+          - name: quote
+            label: 인용문 — 참가자·학생의 한마디
+            widget: object
+            fields:
+              - { name: quote, label: 인용문, widget: text, maxlength: 60, hint: "60자 이내" }
+              - { name: quote_by, label: 말한 사람, widget: string, maxlength: 20, required: false }
+              - name: photos
+                label: 사진 (선택, 1장)
+                widget: list
+                required: false
+                max: 1
+                fields: [*src, *focus, *alt]
+              - { name: body, label: 본문, widget: text, maxlength: 300, hint: "300자 이내" }
+          - name: nums
+            label: 숫자 강조 — 참가 인원, 운영 횟수
+            widget: object
+            fields:
+              - name: stats
+                label: 숫자 3개
+                widget: list
+                min: 3
+                max: 3
+                fields:
+                  - { name: value, label: 숫자, widget: string, maxlength: 8, hint: "예: 150명" }
+                  - { name: label, label: 설명, widget: string, maxlength: 10, hint: "예: 참가 종사자" }
+              - name: photos
+                label: 사진 (선택, 1장)
+                widget: list
+                required: false
+                max: 1
+                fields: [*src, *focus, *alt]
+              - { name: body, label: 본문, widget: text, maxlength: 250, hint: "250자 이내" }
+          - name: short
+            label: 짧은 소식 — 개강, 공지
+            widget: object
+            fields:
+              - { name: body, label: 본문, widget: text, maxlength: 150, hint: "150자 이내" }
+
+  # ───────────────────────── 사이트 관리 ─────────────────────────
+  - name: settings
+    label: 사이트 관리
+    description: 연락처, 링크, 실적처럼 가끔 바꾸는 내용
+    files:
+      - name: site
+        label: 연락처 · 링크 · 슬로건
+        file: src/_data/site.json
+        format: json
+        fields:
+          - { name: name, label: 회사 이름, widget: string }
+          - { name: url, label: 사이트 주소, widget: string, readonly: true }
+          - { name: description, label: 검색 결과에 보일 회사 설명, widget: text, maxlength: 150 }
+          - { name: keywords, label: 검색어, widget: string, hint: "쉼표로 구분 (예: 대전 교사 연수, 울산 AI 교육)" }
+          - { name: slogan_line1, label: 첫 화면 슬로건 첫 줄, widget: string, maxlength: 20 }
+          - { name: slogan_line2, label: 첫 화면 슬로건 둘째 줄 (주황색), widget: string, maxlength: 20 }
+          - { name: intro, label: 첫 화면 소개 글, widget: text, maxlength: 160 }
+          - { name: academy_url, label: 학원 사이트 주소, widget: string, required: false, hint: "비워 두면 '학원 바로가기' 버튼이 숨겨집니다" }
+          - { name: lms_url, label: LMS 주소, widget: string, required: false }
+          - { name: inquiry_form_url, label: 문의서 주소 (구글 설문지 등), widget: string, required: false, hint: "비워 두면 '문의서 작성하기' 버튼이 숨겨집니다" }
+          - { name: newsletter_url, label: 소식지 구독 신청 주소 (스티비 등), widget: string, required: false, hint: "비워 두면 구독 칸이 숨겨집니다" }
+          - { name: brochure_pdf, label: 회사 소개서 PDF, widget: file, required: false, hint: "올리면 '소개서 내려받기' 버튼이 생깁니다" }
+          - name: hq
+            label: 대전 본사
+            widget: object
+            fields:
+              - { name: phone, label: 전화, widget: string, required: false }
+              - { name: email, label: 메일, widget: string, required: false }
+              - { name: address, label: 주소, widget: string, required: false }
+          - name: center
+            label: 울산 교육센터
+            widget: object
+            fields:
+              - { name: phone, label: 전화, widget: string, required: false }
+              - { name: email, label: 메일, widget: string, required: false }
+              - { name: address, label: 주소, widget: string, required: false }
+          - name: business
+            label: 사업자 정보 (맨 아래 표시)
+            widget: object
+            fields:
+              - { name: ceo, label: 대표자, widget: string, required: false }
+              - { name: reg_no, label: 사업자등록번호, widget: string, required: false }
+          - { name: naver_verification, label: 네이버 서치어드바이저 확인 코드, widget: string, required: false, hint: "네이버에서 받은 meta 태그의 content 값만 붙여 넣기" }
+          - { name: google_verification, label: 구글 서치 콘솔 확인 코드, widget: string, required: false }
+
+      - name: home
+        label: 첫 화면 숫자 · 프로젝트 예시 · 실적
+        file: src/_data/home.json
+        format: json
+        fields:
+          - name: stats
+            label: 첫 화면 숫자 4개
+            widget: list
+            min: 4
+            max: 4
+            fields:
+              - { name: value, label: 숫자, widget: string, maxlength: 10 }
+              - { name: label, label: 설명, widget: string, maxlength: 16 }
+          - name: story
+            label: 교육 철학 아래 프로젝트 예시
+            widget: object
+            fields:
+              - { name: title, label: 제목, widget: string }
+              - { name: caption, label: 설명, widget: string }
+              - name: steps
+                label: 단계 4개
+                widget: list
+                min: 4
+                max: 4
+                fields:
+                  - { name: label, label: 단계 이름, widget: string, maxlength: 12 }
+                  - { name: quote, label: 학생의 질문이나 말, widget: string, maxlength: 30 }
+                  - { name: text, label: 설명, widget: text, maxlength: 60 }
+          - name: records
+            label: 실적
+            widget: object
+            fields:
+              - name: certified
+                label: 선정 · 인증
+                widget: list
+                summary: "{{year}} {{text}}"
+                fields:
+                  - { name: year, label: 연도, widget: string, required: false, maxlength: 6, hint: "예: 2025 · 비워도 됩니다" }
+                  - { name: text, label: 내용, widget: string, maxlength: 40 }
+              - name: programs
+                label: 기관 교육 · 행사
+                widget: list
+                summary: "{{year}} {{text}}"
+                fields:
+                  - { name: year, label: 연도, widget: string, required: false, maxlength: 6 }
+                  - { name: text, label: 내용, widget: string, maxlength: 40 }
+              - name: contests
+                label: 대회 운영 · 출전
+                widget: list
+                summary: "{{year}} {{text}}"
+                fields:
+                  - { name: year, label: 연도, widget: string, required: false, maxlength: 6 }
+                  - { name: text, label: 내용, widget: string, maxlength: 40 }
+          - name: works
+            label: 대표 작품 (포스터)
+            widget: list
+            fields:
+              - { name: image, label: 포스터 이미지, widget: image }
+              - { name: title, label: 작품 이름, widget: string, maxlength: 40 }
+              - { name: text, label: 설명, widget: text, maxlength: 80 }
+          - { name: partners, label: 함께한 곳, widget: string, hint: "가운뎃점(·)으로 구분" }

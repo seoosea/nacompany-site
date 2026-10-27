@@ -1,0 +1,51 @@
+---
+layout: base.njk
+---
+{%- set b = block or {} -%}
+{%- set t = b.type or "short" -%}
+{%- macro photo(p, ratio) -%}
+{%- if p and p.src -%}<img class="ph {{ ratio }}" src="{{ p.src }}" alt="{{ p.alt or title }}" style="object-fit:cover;object-position:center {{ p.focus or 'center' }}">{%- endif -%}
+{%- endmacro -%}
+<div class="article-page">
+  <div class="wrap">
+    <a class="back" href="/playsteam/">← PLAYSTEAM 목록</a>
+    <article class="art{% if t == 'short' %} short{% endif %}">
+      <p class="meta"><b>{{ corner }}</b><span>{{ issue }}</span><span>{{ category }}{% if region %} · {{ region }}{% endif %}</span><time datetime="{{ page.date | isoDate }}">{{ page.date | krDate }}</time></p>
+      <h1>{{ title }}</h1>
+
+      {% if t == "big" %}
+        {{ photo(b.photos[0], "r169") }}
+        {% if summary %}<p class="sum">{{ summary }}</p>{% endif %}
+      {% elif t == "trio" %}
+        {% if summary %}<p class="sum">{{ summary }}</p>{% endif %}
+        {% if b.photos and b.photos.length %}<div class="trio">{% for p in b.photos | head(3) %}{{ photo(p, "") }}{% endfor %}</div>{% endif %}
+      {% elif t == "quote" %}
+        <div class="qrow">
+          <div><blockquote class="quote">{{ b.quote }}</blockquote>{% if b.quote_by %}<p class="who">— {{ b.quote_by }}</p>{% endif %}</div>
+          {% if b.photos and b.photos.length %}{{ photo(b.photos[0], "r11") }}{% endif %}
+        </div>
+      {% elif t == "nums" %}
+        {% if summary %}<p class="sum">{{ summary }}</p>{% endif %}
+        {% if b.stats and b.stats.length %}<div class="tiles">{% for s in b.stats | head(3) %}<div class="tile"><b>{{ s.value }}</b><span>{{ s.label }}</span></div>{% endfor %}</div>{% endif %}
+        {% if b.photos and b.photos.length %}{{ photo(b.photos[0], "r169") }}{% endif %}
+      {% endif %}
+
+      <div class="body">{{ b.body | paragraphs | safe }}</div>
+
+      <div class="share">
+        <button type="button" id="copyLink">기사 링크 복사</button>
+        {% if pdf %}<a href="{{ pdf }}" target="_blank" rel="noopener">소식지 PDF로 보기</a>{% endif %}
+        <span class="done" id="copyDone" role="status" hidden></span>
+      </div>
+    </article>
+
+    {%- set others = [] -%}
+    {%- for a in collections.articles -%}{%- if a.url != page.url and others.length < 3 -%}{%- set others = (others.push(a), others) -%}{%- endif -%}{%- endfor -%}
+    {% if others.length %}
+    <div class="more-arts">
+      <h2 style="font-size:20px">다른 기사</h2>
+      <div class="arts">{% for a in others %}{% include "card.njk" %}{% endfor %}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>

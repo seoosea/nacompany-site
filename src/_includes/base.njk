@@ -1,0 +1,61 @@
+{%- set pageTitle = (title + " | " + site.name) if title else (site.name + " | 대전·울산 AI·로봇 교육, 교사 연수, 기관 교육") -%}
+{%- set pageDesc = description or summary or site.description -%}
+{%- set pageImage = ogImage or "/assets/img/og.jpg" -%}
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDesc }}">
+<meta name="keywords" content="{{ site.keywords }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="{{ 'article' if issue else 'website' }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title or site.name }}">
+<meta property="og:description" content="{{ pageDesc }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}{{ pageImage }}">
+<meta name="twitter:card" content="summary_large_image">
+{%- if site.naver_verification %}<meta name="naver-site-verification" content="{{ site.naver_verification }}">{% endif %}
+{%- if site.google_verification %}<meta name="google-site-verification" content="{{ site.google_verification }}">{% endif %}
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 바로가기</a>
+<nav class="nav" aria-label="주요 메뉴">
+  <div class="wrap">
+    <a class="logo" href="/">Na Company<i></i></a>
+    <ul>
+      <li><a href="/#about">회사 소개</a></li>
+      <li><a href="/#philosophy">교육 철학</a></li>
+      <li><a href="/#programs">교육 프로그램</a></li>
+      <li><a href="/#record">실적</a></li>
+      <li><a href="/playsteam/" {% if page.url and page.url.startsWith('/playsteam') %}aria-current="page"{% endif %}>PLAYSTEAM</a></li>
+      <li><a href="/#contact">문의</a></li>
+    </ul>
+    <div class="ext">
+      {% if site.academy_url %}<a href="{{ site.academy_url }}" target="_blank" rel="noopener">학원 바로가기 ↗</a>{% endif %}
+      {% if site.lms_url %}<a href="{{ site.lms_url }}" target="_blank" rel="noopener">LMS 로그인 ↗</a>{% endif %}
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+{{ content | safe }}
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo" style="font-size:16px">Na Company<i></i></span>
+    <span>{{ site.name }}{% if site.business.ceo %} · 대표 {{ site.business.ceo }}{% endif %}{% if site.business.reg_no %} · 사업자등록번호 {{ site.business.reg_no }}{% endif %}</span>
+    <span>© {{ build.year }} Na Company, Ltd.</span>
+  </div>
+</footer>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

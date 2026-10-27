@@ -1,0 +1,12 @@
+{#- 기사 목록 카드 하나. 사용: {% set a = 기사 %}{% include "card.njk" %} -#}
+{%- set b = a.data.block or {} -%}
+{%- set pic = b | firstPhoto -%}
+<a class="card" href="{{ a.url }}">
+  {% if pic %}<div class="thumb" style="background-image:url('{{ pic }}');background-position:center {{ b.photos[0].focus or 'center' }}" role="img" aria-label="{{ a.data.title }} 사진"></div>{% else %}<div class="thumb none" aria-hidden="true"><span>{{ a.data.corner }}<i></i></span></div>{% endif %}
+  <div class="cb">
+    <p class="cat">{{ a.data.corner }}</p>
+    <h3>{{ a.data.title }}</h3>
+    <p>{{ a.data.summary or (b.body | excerpt(56)) }}</p>
+    <p class="loc">{{ a.data.category }}{% if a.data.region %} · {{ a.data.region }}{% endif %}</p>
+  </div>
+</a>

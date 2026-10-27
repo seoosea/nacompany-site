@@ -1,0 +1,188 @@
+---
+layout: base.njk
+permalink: /
+---
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Na Company, Ltd · 대전 본사 · 울산 교육센터</p>
+      <h1 style="margin-top:14px">{{ site.slogan_line1 }}<br><em>{{ site.slogan_line2 }}</em></h1>
+      <p class="lead">{{ site.intro }}</p>
+      <div class="btns">
+        <a class="btn primary" href="#contact">기관 교육 문의</a>
+        {% if site.brochure_pdf %}<a class="btn ghost" href="{{ site.brochure_pdf }}" target="_blank" rel="noopener">회사 소개서 받기</a>{% endif %}
+      </div>
+    </div>
+    <figure class="drawfig"><canvas id="draw" role="img" aria-label="주황 점 하나에서 흰 선이 여러 갈래로 뻗어 나가며 공간을 그려 가는 움직임"></canvas></figure>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    {% for s in home.stats %}<div class="stat"><b>{{ s.value }}</b><span>{{ s.label }}</span></div>{% endfor %}
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">회사 소개</p>
+      <h2>교육 현장의 23년과<br>교육 스타트업의 기획력이 만났습니다</h2>
+    </div>
+    <div class="roots">
+      <article class="root">
+        <p class="tag">ACADEMY · 23년</p>
+        <h3>로봇코딩 아카데미</h3>
+        <p>유아부터 고등학생까지 로봇과 코딩을 가르치며 국내외 대회 수상 실적을 쌓아 온 교육 현장입니다. 자체 LMS로 수업을 운영합니다.</p>
+      </article>
+      <article class="root">
+        <p class="tag">STARTUP · ROOTA</p>
+        <h3>ROOTA</h3>
+        <p>아이들이 생활 속 불편함을 제품과 서비스로 바꿔 보는 경제·기업가정신 교육 툴을 직접 개발한 교육 스타트업입니다.</p>
+      </article>
+    </div>
+    <p class="merge">코로나로 대면 교육이 멈추던 시기, 나컴퍼니가 아카데미를 인수했습니다. 오랜 현장 경험에 기획과 기술을 더해 지금은 학생 교육, 교사 연수, 공공기관 프로그램을 함께 운영합니다.</p>
+    <div class="sites">
+      <div class="site">
+        <p class="k">HEAD OFFICE · 대전</p>
+        <h3>본사</h3>
+        <p>기관 교육 기획과 운영, 교사 연수, 교육 콘텐츠 개발, 제휴를 맡습니다.</p>
+      </div>
+      <div class="site">
+        <p class="k">EDUCATION CENTER · 울산</p>
+        <h3>교육센터 · 로봇코딩 아카데미</h3>
+        <p>5세부터 고등학생까지 정규 수업과 대회 팀을 운영합니다.{% if site.academy_url %} 수강 상담은 학원 사이트에서 받습니다.{% endif %}</p>
+        {% if site.academy_url %}<a class="more" href="{{ site.academy_url }}" target="_blank" rel="noopener">학원 사이트로 가기 ↗</a>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="phil" id="philosophy">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">교육 철학</p>
+      <h2>묻고, 판단하고, 해낸다</h2>
+      <p class="lead">'어떻게 코딩하는가'보다 '코딩으로 무엇을 해결할 것인가'를 먼저 묻습니다. AI가 많은 일을 도와주는 시대에 필요한 것은 정답을 맞히는 능력이 아니라, 문제를 찾고 스스로 판단해 끝까지 해내는 힘이기 때문입니다.</p>
+    </div>
+    <div class="weapons">
+      <div class="weapon"><p class="k">01 · 문제를 찾는다</p><h3>묻는 힘</h3><p>일상의 불편함에서 무엇이 진짜 문제인지 찾고, 누구를 위해 무엇을 바꿀지 스스로 정합니다.</p></div>
+      <div class="weapon"><p class="k">02 · 따져 보고 고른다</p><h3>판단하는 힘</h3><p>AI가 내놓은 답을 그대로 믿지 않습니다. 맞는지 확인하고, 여러 방법 중 무엇이 나은지 근거를 들어 고릅니다.</p></div>
+      <div class="weapon"><p class="k">03 · 실제로 되게 한다</p><h3>해내는 힘</h3><p>로봇, 앱, 서비스, 업무 개선안까지. 생각을 실제로 작동하는 결과로 만들고, 틀리면 고쳐 다시 시도합니다.</p></div>
+    </div>
+    <p class="merge" style="margin-top:28px">모든 수업은 <b>팀 프로젝트</b>로 진행합니다. 함께 묻고, 함께 판단하고, 함께 해내는 경험이 곧 협력하는 힘이 됩니다.</p>
+
+    {% if home.story and home.story.steps.length %}
+    <div class="story">
+      <div class="story-top"><h3>{{ home.story.title }}</h3><span>{{ home.story.caption }}</span></div>
+      <div class="steps">
+        {% for st in home.story.steps %}<div class="step"><p class="n">{{ loop.index }} · {{ st.label }}</p><q>{{ st.quote }}</q><p>{{ st.text }}</p></div>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="programs">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">기관 교육 프로그램</p>
+      <h2>대상과 목적에 맞춰<br>기획하고 운영합니다</h2>
+      <p class="lead">아래 프로그램을 기본으로, 기관의 일정·인원·예산에 맞춰 회차와 내용을 조정합니다.</p>
+    </div>
+    <div class="progs">
+      <article class="prog"><p class="who">교사</p><h3>교사 연수</h3><p>디지털 역량 강화, 디지털교과서 활용, 수업에 바로 쓰는 AI·코딩 프로젝트 설계</p><dl><dt>형태</dt><dd>직무연수 · 워크숍</dd><dt>대상</dt><dd>초·중·고 교사</dd></dl></article>
+      <article class="prog"><p class="who">학생</p><h3>AI 프로젝트 교육</h3><p>AI와 로봇을 활용해 실제 문제를 해결하는 프로젝트형 수업</p><dl><dt>형태</dt><dd>방과후 · 캠프 · 정규수업 연계</dd><dt>대상</dt><dd>초·중·고 학생</dd></dl></article>
+      <article class="prog"><p class="who">학생</p><h3>기업가정신 · 경제교육</h3><p>ROOTA 교육 툴로 시장조사부터 가치 제안, 제품 기획까지 경험하는 수업</p><dl><dt>형태</dt><dd>캠프 · 해커톤</dd><dt>대상</dt><dd>초등 고학년 ~ 중학생</dd></dl></article>
+      <article class="prog"><p class="who">성인 · 종사자</p><h3>업무에 쓰는 AI 교육</h3><p>현장 종사자가 자기 업무 문제를 AI로 풀어 보는 실습형 워크숍</p><dl><dt>형태</dt><dd>워크숍 · 대규모 행사</dd><dt>대상</dt><dd>복지기관·공공기관 종사자</dd></dl></article>
+      <article class="prog"><p class="who">기관</p><h3>해커톤 · 대회 운영</h3><p>주제 기획, 심사 기준, 진행, 결과 보고까지 대회 전 과정을 맡습니다</p><dl><dt>형태</dt><dd>1일 ~ 2일 행사</dd><dt>대상</dt><dd>학생 · 청소년</dd></dl></article>
+      <article class="prog"><p class="who">학생 · 청소년</p><h3>진로 · 체험</h3><p>IoT·로봇 진로체험 캠프, 축제·체험전 부스 운영</p><dl><dt>형태</dt><dd>캠프 · 부스</dd><dt>대상</dt><dd>초·중학생</dd></dl></article>
+    </div>
+    <p class="custom">원하시는 프로그램이 위에 없나요? <a href="#contact">대상과 목적을 알려 주시면 맞춤으로 기획해 드립니다.</a></p>
+  </div>
+</section>
+
+<section class="rec" id="record">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">실적</p>
+      <h2>함께한 기관과 쌓아 온 기록</h2>
+    </div>
+    <div class="rec-grid">
+      {% for col in [["선정 · 인증", home.records.certified], ["기관 교육 · 행사", home.records.programs], ["대회 운영 · 출전", home.records.contests]] %}
+      <div class="rec-col">
+        <h3>{{ col[0] }}</h3>
+        <ul>{% for r in col[1] %}<li><span>{{ r.year }}</span>{{ r.text }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% if home.works.length %}
+    <div class="works">
+      {% for w in home.works %}
+      <figure class="work">
+        <img src="{{ w.image }}" alt="{{ w.title }} 포스터" loading="lazy">
+        <figcaption><b>{{ w.title }}</b><span>{{ w.text }}</span></figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if home.partners %}<p class="partners"><b>함께한 곳</b>{{ home.partners }}</p>{% endif %}
+  </div>
+</section>
+
+<section id="playsteam">
+  <div class="wrap">
+    <div class="zine-top">
+      <div>
+        <p class="eyebrow" style="margin-bottom:12px">소식지 · 연 4회 발행</p>
+        <p class="mast">PLAYSTEAM <span>웹진</span></p>
+      </div>
+      {% if collections.articles.length %}<p class="issue-note"><b>{{ collections.articles[0].data.issue }}</b>최신호</p>{% endif %}
+    </div>
+    {% if collections.articles.length %}
+    <div class="arts">
+      {% for a in collections.articles | head(6) %}{% include "card.njk" %}{% endfor %}
+    </div>
+    <p style="margin-top:20px"><a class="btn line" href="/playsteam/">지난 호까지 모두 보기</a></p>
+    {% else %}
+    <p class="empty">첫 기사를 준비하고 있습니다.</p>
+    {% endif %}
+    {% if site.newsletter_url %}
+    <div class="sub">
+      <div><h3>새 호가 나오면 메일로 받아 보세요</h3><p>1년에 네 번, 교육 현장 소식과 새 프로그램을 보내 드립니다.</p></div>
+      <a class="btn primary" href="{{ site.newsletter_url }}" target="_blank" rel="noopener">구독 신청하기</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if site.brochure_pdf %}
+<div class="bro" id="brochure">
+  <div class="wrap">
+    <div><h3>회사 소개서 (PDF)</h3><p>기관 내부 보고에 쓰실 수 있도록 회사 소개, 프로그램, 대표 실적을 정리했습니다.</p></div>
+    <a class="btn primary" href="{{ site.brochure_pdf }}" target="_blank" rel="noopener">소개서 내려받기</a>
+  </div>
+</div>
+{% endif %}
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:0">
+      <p class="eyebrow">문의</p>
+      <h2>기관 교육을<br>의뢰해 주세요</h2>
+      <p class="lead">대상, 인원, 희망 일정을 알려 주시면 기획안과 함께 연락드립니다.</p>
+      {% if site.inquiry_form_url %}<p><a class="btn primary" href="{{ site.inquiry_form_url }}" target="_blank" rel="noopener">문의서 작성하기</a></p>{% endif %}
+    </div>
+    <div class="offices">
+      {% for o in [["대전 · 본사", "기관 교육 · 연수 · 제휴", site.hq], ["울산 · 교육센터", "수강 상담 · 대회 팀", site.center]] %}
+      <div class="office"><p class="k">{{ o[0] }}</p><h3>{{ o[1] }}</h3>
+        <dl>
+          {% if o[2].phone %}<dt>전화</dt><dd>{{ o[2].phone }}</dd>{% endif %}
+          {% if o[2].email %}<dt>메일</dt><dd>{{ o[2].email }}</dd>{% endif %}
+          {% if o[2].address %}<dt>주소</dt><dd>{{ o[2].address }}</dd>{% endif %}
+        </dl>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

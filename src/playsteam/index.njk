@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: PLAYSTEAM 웹진
+description: 주식회사 나컴퍼니가 1년에 네 번 펴내는 교육 소식지 PLAYSTEAM. 대회, 기관 교육, 수업 현장 소식을 호수별로 모았습니다.
+permalink: /playsteam/
+---
+{%- set groups = collections.articles | groupByIssue -%}
+<section>
+  <div class="wrap">
+    <div class="zine-top">
+      <div>
+        <p class="eyebrow" style="margin-bottom:12px">소식지 · 연 4회 발행</p>
+        <h1 class="mast">PLAYSTEAM <span>웹진</span></h1>
+      </div>
+      <p class="issue-note"><b>{{ collections.articles.length }}편</b>지금까지 실린 기사</p>
+    </div>
+    {% if groups.length > 1 %}
+    <nav class="issue-jump" aria-label="호수 바로가기">
+      {% for g in groups %}<a href="#issue-{{ loop.index }}">{{ g.issue }}</a>{% endfor %}
+    </nav>
+    {% endif %}
+    {% for g in groups %}
+    <div class="issue-block" id="issue-{{ loop.index }}">
+      <h2>{{ g.issue }}</h2>
+      <div class="arts">{% for a in g.items %}{% include "card.njk" %}{% endfor %}</div>
+    </div>
+    {% else %}
+    <p class="empty">첫 기사를 준비하고 있습니다.</p>
+    {% endfor %}
+    {% if site.newsletter_url %}
+    <div class="sub">
+      <div><h3>새 호가 나오면 메일로 받아 보세요</h3><p>1년에 네 번, 교육 현장 소식과 새 프로그램을 보내 드립니다.</p></div>
+      <a class="btn primary" href="{{ site.newsletter_url }}" target="_blank" rel="noopener">구독 신청하기</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
