@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "position": 5,
+      "color": "coral",
+      "label": "교육 의뢰",
+      "title": "이런 교육,\n맡기실 수 있어요",
+      "lines": ["교사 연수", "학생 AI 프로젝트", "종사자 AI 워크숍", "해커톤 · 대회 운영"],
+      "link_text": "의뢰 방법 보기",
+      "link": "/programs/"
+    },
+    {
+      "position": 12,
+      "color": "deep",
+      "label": "PLAYSTEAM 구독",
+      "title": "새 호가 나오면\n메일로 받아 보세요",
+      "lines": ["1년에 네 번", "언제든 구독 취소"],
+      "link_text": "구독하기",
+      "link": "subscribe"
+    }
+  ]
+}

@@ -8,9 +8,9 @@ layout: base.njk
 {%- endmacro -%}
 <div class="article-page">
   <div class="wrap">
-    <a class="back" href="/playsteam/">← PLAYSTEAM 목록</a>
+    <a class="back" href="/">← 최근 기사</a>
     <article class="art{% if t == 'short' %} short{% endif %}">
-      <p class="meta"><b>{{ corner }}</b><span>{{ issue }}</span><span>{{ category }}{% if region %} · {{ region }}{% endif %}</span><time datetime="{{ page.date | isoDate }}">{{ page.date | krDate }}</time></p>
+      <p class="meta"><b>{{ corner }}</b>{% if issue %}<a href="/playsteam/{{ issue | issueSlug }}/">PLAYSTEAM {{ issue }}</a>{% endif %}<span>{{ category }}{% if region %} · {{ region }}{% endif %}</span>{% if kind != "about" %}<time datetime="{{ page.date | isoDate }}">{{ page.date | dotDate }}</time>{% endif %}</p>
       <h1>{{ title }}</h1>
 
       {% if t == "big" %}
@@ -40,11 +40,11 @@ layout: base.njk
     </article>
 
     {%- set others = [] -%}
-    {%- for a in collections.articles -%}{%- if a.url != page.url and others.length < 3 -%}{%- set others = (others.push(a), others) -%}{%- endif -%}{%- endfor -%}
+    {%- for a in collections.articles -%}{%- if a.url != page.url and a.data.kind != 'about' and others.length < 4 -%}{%- set others = (others.push(a), others) -%}{%- endif -%}{%- endfor -%}
     {% if others.length %}
     <div class="more-arts">
-      <h2 style="font-size:20px">다른 기사</h2>
-      <div class="arts">{% for a in others %}{% include "card.njk" %}{% endfor %}</div>
+      <h2>다른 기사</h2>
+      <div class="wall" data-wall>{% for a in others %}{%- set i = loop.index0 -%}{%- set hideAttr = '' -%}{% include "brick.njk" %}{% endfor %}</div>
     </div>
     {% endif %}
   </div>

@@ -58,7 +58,8 @@ collections:
         label: 호수
         widget: string
         default: "2026 Vol.03"
-        hint: '예: 2026 Vol.03 — 같은 호 기사는 글자를 똑같이 써 주세요'
+        required: false
+        hint: '이 기사를 묶을 호. 예: 2026 Vol.04 — 같은 호 기사는 글자를 똑같이 써 주세요. 비워 두면 첫 화면에만 나오고 호에는 들어가지 않습니다'
       - name: corner
         label: 코너
         widget: select
@@ -75,6 +76,22 @@ collections:
         required: false
       - { name: date, label: 날짜, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
       - { name: published, label: 공개, widget: boolean, default: true, hint: "끄면 홈페이지에 보이지 않습니다 (임시 저장)" }
+      - { name: pin, label: 1면에 올리기, widget: boolean, default: false, required: false, hint: "켜면 첫 화면 맨 위에 크게 나옵니다. 여러 개가 켜져 있으면 가장 최근 기사 하나만 올라갑니다" }
+      - { name: pin_until, label: 1면 고정 마지막 날, widget: datetime, time_format: false, format: "YYYY-MM-DD", required: false, hint: "이 날이 지나면 저절로 내려가고 '나컴퍼니의 생각'이 다시 맨 위로 올라옵니다. 비워 두면 직접 끌 때까지 계속 올라가 있습니다" }
+      - name: card
+        label: 목록 사진 모양
+        widget: select
+        required: false
+        default: ""
+        hint: "첫 화면 벽돌에서 사진이 보이는 모양. 비워 두면 자동으로 섞입니다"
+        options:
+          - { label: "자동", value: "" }
+          - { label: "세로로 길게 (4:5)", value: tall }
+          - { label: "세로 (3:4)", value: portrait }
+          - { label: "정사각형", value: square }
+          - { label: "가로 (4:3)", value: wide }
+          - { label: "가로로 길게 (16:10)", value: panorama }
+      - { name: kind, label: 종류, widget: hidden, default: article }
       - { name: summary, label: 요약, widget: string, maxlength: 50, required: false, hint: "목록 카드에 보이는 한 줄 · 50자 이내" }
       - { name: pdf, label: 소식지 PDF (선택), widget: file, required: false, hint: "이 기사가 실린 소식지 PDF를 올리면 기사 아래에 버튼이 생깁니다" }
       - name: block
@@ -192,64 +209,48 @@ collections:
           - { name: naver_verification, label: 네이버 서치어드바이저 확인 코드, widget: string, required: false, hint: "네이버에서 받은 meta 태그의 content 값만 붙여 넣기" }
           - { name: google_verification, label: 구글 서치 콘솔 확인 코드, widget: string, required: false }
 
-      - name: home
-        label: 첫 화면 숫자 · 프로젝트 예시 · 실적
-        file: src/_data/home.json
+      - name: boxes
+        label: 첫 화면 정보 칸 (교육 의뢰 · 구독 등)
+        file: src/_data/boxes.json
         format: json
         fields:
-          - name: stats
-            label: 첫 화면 숫자 4개
+          - name: items
+            label: 정보 칸
             widget: list
-            min: 4
-            max: 4
+            summary: "{{position}}번째 · {{label}}"
+            hint: "기사 사이에 끼워 넣는 색 칸입니다. 2~3개가 적당합니다"
             fields:
-              - { name: value, label: 숫자, widget: string, maxlength: 10 }
-              - { name: label, label: 설명, widget: string, maxlength: 16 }
-          - name: story
-            label: 교육 철학 아래 프로젝트 예시
-            widget: object
-            fields:
-              - { name: title, label: 제목, widget: string }
-              - { name: caption, label: 설명, widget: string }
-              - name: steps
-                label: 단계 4개
-                widget: list
-                min: 4
-                max: 4
-                fields:
-                  - { name: label, label: 단계 이름, widget: string, maxlength: 12 }
-                  - { name: quote, label: 학생의 질문이나 말, widget: string, maxlength: 30 }
-                  - { name: text, label: 설명, widget: text, maxlength: 60 }
-          - name: records
-            label: 실적
-            widget: object
-            fields:
-              - name: certified
-                label: 선정 · 인증
-                widget: list
-                summary: "{{year}} {{text}}"
-                fields:
-                  - { name: year, label: 연도, widget: string, required: false, maxlength: 6, hint: "예: 2025 · 비워도 됩니다" }
-                  - { name: text, label: 내용, widget: string, maxlength: 40 }
-              - name: programs
-                label: 기관 교육 · 행사
-                widget: list
-                summary: "{{year}} {{text}}"
-                fields:
-                  - { name: year, label: 연도, widget: string, required: false, maxlength: 6 }
-                  - { name: text, label: 내용, widget: string, maxlength: 40 }
-              - name: contests
-                label: 대회 운영 · 출전
-                widget: list
-                summary: "{{year}} {{text}}"
-                fields:
-                  - { name: year, label: 연도, widget: string, required: false, maxlength: 6 }
-                  - { name: text, label: 내용, widget: string, maxlength: 40 }
-          - name: works
-            label: 대표 작품 (포스터)
+              - { name: position, label: 몇 번째 기사 앞에 넣을까요, widget: number, value_type: int, min: 1, default: 5 }
+              - name: color
+                label: 색
+                widget: select
+                options: [{ label: 산호색, value: coral }, { label: 남색, value: deep }, { label: 하늘색, value: blue }, { label: 흰색, value: white }]
+              - { name: label, label: 작은 제목, widget: string, maxlength: 16 }
+              - { name: title, label: 큰 제목, widget: text, maxlength: 30, hint: "줄을 바꾸면 그대로 줄이 바뀝니다" }
+              - { name: lines, label: 목록, widget: list, required: false, field: { name: line, label: 한 줄, widget: string, maxlength: 20 } }
+              - { name: link_text, label: 버튼 글자, widget: string, maxlength: 14 }
+              - { name: link, label: 연결할 주소, widget: string, hint: "예: /programs/ · 구독 칸은 subscribe 라고 쓰면 사이트 관리의 구독 주소로 연결됩니다 (구독 주소가 비어 있으면 칸이 숨겨집니다)" }
+      - name: programs
+        label: 맡길 수 있는 교육 · 의뢰 방법
+        file: src/_data/programs.json
+        format: json
+        fields:
+          - { name: intro, label: 안내 문장, widget: text, maxlength: 80 }
+          - name: items
+            label: 교육 프로그램
             widget: list
+            summary: "{{title}}"
             fields:
-              - { name: image, label: 포스터 이미지, widget: image }
-              - { name: title, label: 작품 이름, widget: string, maxlength: 40 }
-              - { name: text, label: 설명, widget: text, maxlength: 80 }
-          - { name: partners, label: 함께한 곳, widget: string, hint: "가운뎃점(·)으로 구분" }
+              - { name: title, label: 이름, widget: string, maxlength: 20 }
+              - { name: who, label: 대상, widget: string, maxlength: 24 }
+              - { name: text, label: 설명, widget: text, maxlength: 90 }
+              - { name: form, label: 운영 형태, widget: string, maxlength: 30, required: false }
+              - { name: proof, label: 운영 사례, widget: string, maxlength: 50, required: false }
+          - name: steps
+            label: 의뢰 순서
+            widget: list
+            min: 3
+            max: 3
+            fields:
+              - { name: title, label: 제목, widget: string, maxlength: 14 }
+              - { name: text, label: 설명, widget: text, maxlength: 60 }

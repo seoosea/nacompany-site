@@ -1,0 +1,10 @@
+{#- 정보 칸 하나. 사용 전에 bx 를 정해 둡니다. -#}
+{%- set href = (site.newsletter_url if bx.link == 'subscribe' else bx.link) -%}
+{%- if bx.link != 'subscribe' or site.newsletter_url -%}
+<a class="box {{ bx.color }}" href="{{ href }}"{% if bx.link == 'subscribe' %} target="_blank" rel="noopener"{% endif %} data-h="1.2">
+  <span class="bk">{{ bx.label }}</span>
+  <h3>{{ bx.title | replace("\n", "<br>") | safe }}</h3>
+  <ul>{% for l in bx.lines %}<li>{{ l }}</li>{% endfor %}</ul>
+  <span class="go">{{ bx.link_text }} →</span>
+</a>
+{%- endif -%}

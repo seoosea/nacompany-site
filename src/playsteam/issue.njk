@@ -1,0 +1,25 @@
+---
+layout: base.njk
+pagination:
+  data: collections.issues
+  size: 1
+  alias: g
+permalink: "/playsteam/{{ g.slug }}/"
+eleventyComputed:
+  title: "PLAYSTEAM {{ g.issue }}"
+  description: "나컴퍼니 소식지 PLAYSTEAM {{ g.issue }}에 실린 기사"
+---
+<section class="page"><div class="wrap">
+  <header class="issue-h">
+    <p class="masthead">PLAYSTEAM</p>
+    <div class="edition mono"><span>{{ g.issue }}</span><span>주식회사 나컴퍼니 · 대전 · 울산</span><span>기사 {{ g.items.length }}편</span></div>
+  </header>
+  <div class="wall" data-wall>
+    {%- for a in g.items -%}{%- set i = loop.index0 -%}{%- set hideAttr = '' -%}{% include "brick.njk" %}{%- endfor -%}
+  </div>
+  <div class="share issue-share">
+    <button type="button" id="copyLink">이 호 링크 복사</button>
+    <span class="done" id="copyDone" role="status" hidden></span>
+    <a href="/playsteam/">지난 호 모두 보기 →</a>
+  </div>
+</div></section>

@@ -1,0 +1,39 @@
+---
+layout: base.njk
+title: 맡길 수 있는 교육
+description: 교사 연수, 학생 AI 프로젝트, 종사자 AI 워크숍, 해커톤 운영까지. 나컴퍼니에 맡길 수 있는 교육과 의뢰 방법.
+permalink: /programs/
+---
+<section class="page"><div class="wrap">
+  <header class="page-h"><span class="badge">교육 의뢰</span><h1>나컴퍼니에 맡길 수 있는 교육</h1><p>{{ programs.intro }}</p></header>
+  <ol class="progs">
+    {% for p in programs.items %}
+    <li class="prog">
+      <div><h2>{{ p.title }}</h2><span class="who">{{ p.who }}</span></div>
+      <div><p>{{ p.text }}</p><p class="form">{{ p.form }}</p>{% if p.proof %}<span class="proof">{{ p.proof }}</span>{% endif %}</div>
+    </li>
+    {% endfor %}
+  </ol>
+
+  <h2 class="sec" id="contact">교육을 맡기는 방법</h2>
+  <ol class="steps">
+    {% for s in programs.steps %}<li><span class="n">{{ loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>{% endfor %}
+  </ol>
+
+  <div class="offices">
+    {% for o in [["대전 · 본사", "기관 교육 · 연수 · 제휴", site.hq], ["울산 · 교육센터", "수강 상담 · 대회 팀", site.center]] %}
+    <div class="office"><span class="k">{{ o[0] }}</span><h3>{{ o[1] }}</h3>
+      <dl>
+        {% if o[2].phone %}<dt>전화</dt><dd>{{ o[2].phone }}</dd>{% endif %}
+        {% if o[2].email %}<dt>메일</dt><dd>{{ o[2].email }}</dd>{% endif %}
+        {% if o[2].address %}<dt>주소</dt><dd>{{ o[2].address }}</dd>{% endif %}
+      </dl>
+    </div>
+    {% endfor %}
+    <div class="office cta">
+      {% if site.inquiry_form_url %}<a class="btn dark" href="{{ site.inquiry_form_url }}" target="_blank" rel="noopener">문의서 작성하기</a>{% endif %}
+      {% if site.brochure_pdf %}<a class="btn" href="{{ site.brochure_pdf }}" target="_blank" rel="noopener">회사 소개서 받기 (PDF)</a>{% endif %}
+      {% if not site.inquiry_form_url and not site.brochure_pdf %}<p>전화나 메일로 대상, 인원, 희망 시기를 알려 주세요.</p>{% endif %}
+    </div>
+  </div>
+</div></section>

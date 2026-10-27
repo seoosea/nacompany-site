@@ -1,0 +1,20 @@
+{#- 벽돌 하나(기사 카드). 사용 전에 a(기사)와 i(순서)를 정해 둡니다. -#}
+{%- set b = a.data.block or {} -%}
+{%- set pic = b | firstPhoto -%}
+{%- if pic -%}
+{%- set r = a | cardRatio(i) -%}
+<a class="cell{% if a.data.kind == 'about' %} about{% endif %}" href="{{ a.url }}" data-h="{{ r | ratioHeight }}"{% if hideAttr %} {{ hideAttr | safe }}{% endif %}>
+  <span class="ph" style="aspect-ratio:{{ r }}"><img src="{{ pic }}" alt="{{ b.photos[0].alt or '' }}" loading="lazy" style="object-position:center {{ b | firstFocus }}"></span>
+  <span class="cat">{{ a.data.corner if a.data.kind == 'about' else a.data.category }}{% if a.data.region %} · {{ a.data.region }}{% endif %}</span>
+  <h3>{{ a.data.title }}</h3>
+  <p>{{ a.data.summary or (b.body | excerpt(56)) }}</p>
+  {% if a.data.kind != 'about' %}<span class="d">{{ a.date | dotDate }}</span>{% endif %}
+</a>
+{%- else -%}
+<a class="cell brief" href="{{ a.url }}" data-h="0.9"{% if hideAttr %} {{ hideAttr | safe }}{% endif %}>
+  <span class="big">{{ a.date | mmdd }}</span>
+  <span class="cat">{{ a.data.category }}</span>
+  <h3>{{ a.data.title }}</h3>
+  <p>{{ a.data.summary or (b.body | excerpt(56)) }}</p>
+</a>
+{%- endif -%}
