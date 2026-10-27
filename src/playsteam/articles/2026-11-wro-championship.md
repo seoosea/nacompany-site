@@ -1,23 +1,20 @@
 ---
 title: 올해 12월, WRO 챔피언십 출전
-issue: 2026 Vol.04
+issue: ''
 corner: What's New
 category: 대회
 region: 울산
-date: 2026-11-02
-published: false
+date: '2026-10-27'
+published: true
 pin: true
-pin_until: 2026-12-31
+pin_until: '2026-12-31'
 card: tall
-summary: WRO 미래혁명가 부문 한국대회 대상 팀이 12월 챔피언십 무대에 섭니다.
+summary: 2026 WRO KOREA 미래혁명가 중등부 대상 팀 '창백한 푸른 점'이 세계 무대에 섭니다.
 block:
   type: big
   photos:
-    - src: /assets/uploads/robot-x.jpg
-      focus: center
-      alt: 위에서 본 X자 모양 로봇
-  body: |-
-    [예시 글입니다. 실제 기사로 바꿔 주세요.]
-
-    1면 고정이 켜져 있고 고정 기간이 2026-12-31까지라서, 그 날짜가 지나면 첫 화면 맨 위에서 저절로 내려갑니다.
+  - src: /assets/uploads/2026-wro-korea.jpg
+    focus: center
+    alt: 로봇을 함께 조정하는 학생들의 손
+  body: 8월 청주에서 열린 2026 WRO 한국대회에서 미래혁명가(중등) 대상을 받은 '창백한 푸른 점' 팀이 세계 챔피언십 WRO IF 출전권을 얻었습니다. 올해 12월, 세계 무대에서 그동안 준비한 프로젝트를 선보입니다.
 ---
