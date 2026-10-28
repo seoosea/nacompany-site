@@ -9,12 +9,15 @@ permalink: /playsteam/
   {% if collections.issues.length %}
   <div class="issues">
     {% for g in collections.issues %}
-    {%- set c = g.items[0].data.block | firstPhoto -%}
+    {%- set lead = (g.items | byCorner("What's New") | featureFirst)[0] or g.items[0] -%}
+    {%- set c = lead.data.block | firstPhoto -%}
     <a class="iss" href="/playsteam/{{ g.slug }}/">
-      <span class="iss-top"><b>PLAYSTEAM</b><span>{{ g.issue }}</span></span>
+      <span class="iss-strip"><span>NA COMPANY — 계간 소식지</span><span>{{ g.issue | upper }}</span></span>
+      <span class="iss-mast">PLAYSTEAM</span>
       <span class="iss-img">{% if c %}<img src="{{ c }}" alt="" loading="lazy">{% endif %}</span>
-      <ol>{% for a in g.items | head(3) %}<li>{{ a.data.title }}</li>{% endfor %}</ol>
-      <span class="mono">기사 {{ g.items.length }}편 →</span>
+      <span class="iss-lead">{{ lead.data.title }}</span>
+      <ol>{% for a in g.items | without(lead) | head(5) %}<li><span>{{ a.data.corner or a.data.category }}</span>{{ a.data.title }}</li>{% endfor %}</ol>
+      <span class="iss-foot"><span>기사 {{ g.items.length }}편</span><span>이 호 읽기 →</span></span>
     </a>
     {% endfor %}
   </div>

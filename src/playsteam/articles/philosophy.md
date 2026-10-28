@@ -1,5 +1,5 @@
 ---
-title: 묻고, 판단하고, 해낸다
+title: 묻는 힘, 판단하는 힘, 해내는 힘
 kind: about
 corner: 나컴퍼니의 생각
 category: 회사 소개

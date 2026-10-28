@@ -1,12 +1,30 @@
 {
   "items": [
     {
-      "position": 5,
+      "position": 3,
       "color": "coral",
       "label": "교육 의뢰",
-      "title": "이런 교육,\n맡기실 수 있어요",
-      "lines": ["교사 연수", "학생 AI 프로젝트", "종사자 AI 워크숍", "해커톤 · 대회 운영"],
+      "title": "교육청·학교·기관이\n맡기는 교육",
+      "lines": [
+        "교사 연수",
+        "학생 AI 프로젝트",
+        "종사자 AI 워크숍",
+        "해커톤 · 대회 운영"
+      ],
       "link_text": "의뢰 방법 보기",
+      "link": "/programs/"
+    },
+    {
+      "position": 6,
+      "color": "ink",
+      "label": "ROOTA · 경제교육",
+      "title": "충남 교육 콘텐츠\n선정",
+      "lines": [
+        "기업가정신 교육",
+        "경제 교육",
+        "직접 개발한 ROOTA 교육 툴"
+      ],
+      "link_text": "프로그램 보기",
       "link": "/programs/"
     },
     {
@@ -14,7 +32,10 @@
       "color": "deep",
       "label": "PLAYSTEAM 구독",
       "title": "새 호가 나오면\n메일로 받아 보세요",
-      "lines": ["1년에 네 번", "언제든 구독 취소"],
+      "lines": [
+        "1년에 네 번",
+        "언제든 구독 취소"
+      ],
       "link_text": "구독하기",
       "link": "subscribe"
     }

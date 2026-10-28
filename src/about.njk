@@ -5,14 +5,18 @@ description: 23년 로봇코딩 교육 현장과 교육 스타트업 ROOTA가 �
 permalink: /about/
 ---
 {%- set about = collections.articles | aboutArticle -%}
-<section class="page"><div class="wrap">
-  <header class="page-h"><span class="badge">회사 소개</span><h1>{{ site.slogan_line1 }} {{ site.slogan_line2 }}</h1><p>{{ site.intro }}</p></header>
-  <div class="about-grid">
-    {% if about and (about.data.block | firstPhoto) %}<figure class="about-ph"><img src="{{ about.data.block | firstPhoto }}" alt="{{ about.data.block.photos[0].alt or '' }}"></figure>{% endif %}
-    <div class="about-tx">
-      {% if about %}<div class="body">{{ about.data.block.body | paragraphs | safe }}</div>{% endif %}
-    </div>
+<section class="hero phil"><div class="wrap">
+  <div class="hero-in">
+    {% if about and (about.data.block | firstPhoto) %}<span class="ph"><img src="{{ about.data.block | firstPhoto }}" alt="{{ about.data.block.photos[0].alt or '' }}"></span>{% endif %}
+    <span class="tx">
+      <span class="badge">회사 소개</span>
+      <h1>{{ site.slogan_line1 }}<br>{{ site.slogan_line2 }}</h1>
+      <p>{{ site.intro }}</p>
+    </span>
   </div>
+</div></section>
+<section class="page about-page"><div class="wrap">
+  {% if about %}<div class="about-body">{{ about.data.block.body | paragraphs | safe }}</div>{% endif %}
   <div class="roots">
     <div><span class="k">ACADEMY · 23년</span><h3>로봇코딩 아카데미</h3><p>유아부터 고등학생까지 로봇과 코딩을 가르치며 국내외 대회에 나가는 교육 현장입니다. 자체 LMS로 수업을 운영합니다.</p></div>
     <div><span class="k">STARTUP · ROOTA</span><h3>ROOTA</h3><p>아이들이 생활 속 불편함을 제품과 서비스로 바꿔 보는 경제·기업가정신 교육 툴을 직접 개발했습니다.</p></div>

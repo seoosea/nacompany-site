@@ -52,7 +52,7 @@ eleventyComputed:
   <header class="nl-head">
     <div class="nl-strip"><span>NA COMPANY, LTD. — 계간 소식지</span><span>{{ g.issue | upper }}</span></div>
     <h1 class="nl-mast">PLAYSTEAM</h1>
-    <div class="nl-sub"><span>묻고, 판단하고, 해낸다.</span><span>기사 {{ g.items.length }}편</span></div>
+    <div class="nl-sub"><span>{{ site.slogan_line1 }} {{ site.slogan_line2 }}</span><span>기사 {{ g.items.length }}편</span></div>
   </header>
 
   {% if picks.length or specials.length %}

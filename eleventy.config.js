@@ -99,6 +99,17 @@ export default function (eleventyConfig) {
     block && block.photos && block.photos[0] ? block.photos[0].focus || "center" : "center"
   );
 
+  // 첫 화면: Editor's Pick은 가장 최근 것 하나만
+  eleventyConfig.addFilter("latestPickOnly", (items) => {
+    let seen = false;
+    return (items || []).filter((a) => {
+      if (a.data.corner !== "Editor's Pick") return true;
+      if (seen) return false;
+      seen = true;
+      return true;
+    });
+  });
+
   // 소식지 호 페이지: 코너별로 나누기
   const CORNERS = ["Editor's Pick", "Special Class", "What's New", "Update"];
   eleventyConfig.addFilter("byCorner", (items, c) => (items || []).filter((a) => a.data.corner === c));
