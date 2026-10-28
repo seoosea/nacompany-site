@@ -189,8 +189,9 @@ collections:
           - { name: description, label: 검색 결과에 보일 회사 설명, widget: text, maxlength: 150 }
           - { name: keywords, label: 검색어, widget: string, hint: "쉼표로 구분 (예: 대전 교사 연수, 울산 AI 교육)" }
           - { name: slogan_line1, label: 첫 화면 슬로건 첫 줄, widget: string, maxlength: 20 }
-          - { name: slogan_line2, label: 첫 화면 슬로건 둘째 줄 (주황색), widget: string, maxlength: 20 }
+          - { name: slogan_line2, label: 첫 화면 슬로건 둘째 줄, widget: string, maxlength: 20 }
           - { name: intro, label: 첫 화면 소개 글, widget: text, maxlength: 160 }
+          - { name: services, label: 회사 소개 · 나컴퍼니가 하는 일, widget: list, required: false, hint: "한 줄에 하나씩. 회사 소개 페이지에 번호를 붙여 보여 줍니다", field: { name: service, label: 하는 일, widget: string, maxlength: 20 } }
           - { name: academy_url, label: 학원 사이트 주소, widget: string, required: false, hint: "비워 두면 '학원 바로가기' 버튼이 숨겨집니다" }
           - { name: lms_url, label: LMS 주소, widget: string, required: false }
           - { name: inquiry_form_url, label: 문의서 주소 (구글 설문지 등), widget: string, required: false, hint: "비워 두면 '문의서 작성하기' 버튼이 숨겨집니다" }

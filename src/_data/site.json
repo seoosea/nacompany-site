@@ -6,6 +6,14 @@
   "slogan_line1": "묻는 힘, 판단하는 힘,",
   "slogan_line2": "해내는 힘",
   "intro": "로봇·코딩·AI는 도구입니다. 나컴퍼니는 학교와 기관을 위해, 스스로 문제를 찾고 끝까지 해내는 교육을 기획하고 운영합니다.",
+  "services": [
+    "교육 프로그램 개발",
+    "교수설계",
+    "디지털 전환 교육",
+    "AI 교육",
+    "교육 영상 제작",
+    "LMS 제작"
+  ],
   "academy_url": "",
   "lms_url": "https://playsteam.org",
   "inquiry_form_url": "",

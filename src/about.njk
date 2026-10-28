@@ -16,7 +16,20 @@ permalink: /about/
   </div>
 </div></section>
 <section class="page about-page"><div class="wrap">
-  {% if about %}<div class="about-body">{{ about.data.block.body | paragraphs | safe }}</div>{% endif %}
+  {% if about %}{%- set ph = about.data.block.body | phil -%}
+  <div class="phil-b">
+    <p class="phil-lead">{{ ph.lead }}</p>
+    {% if ph.leadRest %}<p class="phil-rest">{{ ph.leadRest }}</p>{% endif %}
+    {% if ph.powers.length %}<ol class="phil-pw">{% for p in ph.powers %}<li><span class="n">0{{ loop.index }}</span><h3>{{ p.k }}</h3><p>{{ p.v }}</p></li>{% endfor %}</ol>{% endif %}
+    {% for c in ph.close %}<p class="phil-close">{{ c }}</p>{% endfor %}
+  </div>
+  {% endif %}
+  {% if site.services and site.services.length %}
+  <div class="svc">
+    <h2 class="svc-h">나컴퍼니가 하는 일</h2>
+    <ol>{% for s in site.services %}<li><span>{{ "0" if loop.index < 10 }}{{ loop.index }}</span>{{ s }}</li>{% endfor %}</ol>
+  </div>
+  {% endif %}
   <div class="roots">
     <div><span class="k">ACADEMY · 23년</span><h3>로봇코딩 아카데미</h3><p>유아부터 고등학생까지 로봇과 코딩을 가르치며 국내외 대회에 나가는 교육 현장입니다. 자체 LMS로 수업을 운영합니다.</p></div>
     <div><span class="k">STARTUP · ROOTA</span><h3>ROOTA</h3><p>아이들이 생활 속 불편함을 제품과 서비스로 바꿔 보는 경제·기업가정신 교육 툴을 직접 개발했습니다.</p></div>

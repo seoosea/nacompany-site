@@ -99,6 +99,21 @@ export default function (eleventyConfig) {
     block && block.photos && block.photos[0] ? block.photos[0].focus || "center" : "center"
   );
 
+  // 회사 소개: 철학 글을 '첫 문장 / 나머지 / 세 가지 힘(○○ — 설명) / 맺는 말'로 나누기
+  const phil = (t) => {
+    const ps = String(t || "").trim().split(/\n\s*\n/).map((s) => s.trim()).filter(Boolean);
+    const isPower = (p) => /^.{1,12}\s[—–-]\s/.test(p);
+    const first = ps.find((p) => !isPower(p)) || "";
+    const m = first.match(/^(.+?[.?!])\s+(.+)$/s);
+    return {
+      lead: m ? m[1] : first,
+      leadRest: m ? m[2] : "",
+      powers: ps.filter(isPower).map((p) => { const [k, ...v] = p.split(/\s[—–-]\s/); return { k, v: v.join(" — ") }; }),
+      close: ps.filter((p) => p !== first && !isPower(p)),
+    };
+  };
+  eleventyConfig.addFilter("phil", phil);
+
   // 첫 화면: Editor's Pick은 가장 최근 것 하나만
   eleventyConfig.addFilter("latestPickOnly", (items) => {
     let seen = false;
