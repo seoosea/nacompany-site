@@ -89,6 +89,8 @@ img{display:block;max-width:100%}
 .cell.about .cat{color:var(--coral)}
 .cell.about h3{color:var(--blue)}
 .brief{border-top:3px solid var(--ink);padding-top:12px}
+.feed.academy{padding-top:0;background:transparent}
+.feed+.feed.academy .feed-h{border-top:3px solid var(--ink)}
 .qt{background:var(--sheet);border:1px solid var(--ink);padding:22px 20px}
 .qt blockquote{margin:0;font-family:var(--f-serif);font-weight:700;font-size:clamp(17px,1.5vw,20px);line-height:1.6}
 .qt .by{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
@@ -198,3 +200,70 @@ img{display:block;max-width:100%}
 
 .foot{border-top:1px solid var(--ink)}
 .foot .wrap{padding-block:24px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+
+/* ── 소식지 한 호 페이지 (지면형) ───────────────────────────── */
+.nl{--nl-paper:#f4f1ea;--nl-blue:#2d5bc4;--nl-coral:#ff6a4d;--nl-mute:#6b6d74;
+  --nl-lat:"Lexend","IBM Plex Sans KR",sans-serif;--nl-it:"Instrument Serif","Noto Serif KR",serif;
+  --nl-mono:"IBM Plex Mono","IBM Plex Sans KR",ui-monospace,monospace;
+  background:var(--nl-paper);padding:clamp(24px,4vw,56px) 0 48px}
+.nl-w{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.nl a:hover h3,.nl h3 a:hover{color:var(--nl-blue)}
+.nl-k{display:block;font-family:var(--nl-mono);font-size:11.5px;letter-spacing:.04em;color:var(--nl-mute)}
+.nl-strip{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--nl-mono);font-size:11px;letter-spacing:.1em;border-bottom:1px solid var(--ink);padding-bottom:10px}
+.nl-mast{font-family:var(--nl-lat);font-weight:800;color:var(--nl-blue);font-size:clamp(52px,15.4vw,184px);line-height:.95;letter-spacing:-.035em;margin:clamp(8px,1.4vw,18px) 0 10px;white-space:nowrap;text-align:center}
+.nl-sub{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:clamp(20px,3vw,36px);border-bottom:1px solid var(--ink)}
+.nl-sub span:first-child{font-family:var(--f-serif);font-size:clamp(15px,1.5vw,18px)}
+.nl-sub span:last-child{font-family:var(--nl-mono);font-size:11px;color:var(--nl-mute);letter-spacing:.08em}
+.nl-l{display:flex;gap:14px;align-items:baseline;font-family:var(--nl-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 clamp(18px,2.4vw,28px)}
+.nl-l b{color:var(--nl-coral);font-weight:500;letter-spacing:.04em}
+.nl-s{padding:clamp(22px,3vw,32px) 0 clamp(28px,4vw,44px);border-bottom:1px solid var(--ink)}
+.nl-row.split{display:grid;grid-template-columns:5fr 7fr;border-bottom:1px solid var(--ink)}
+.nl-row.split .nl-s{border-bottom:0}
+.nl-row.split .pick{padding-right:clamp(20px,3vw,36px);border-right:1px solid var(--ink)}
+.nl-row.split .special{padding-left:clamp(20px,3vw,32px)}
+.nl-q{display:block}
+.nl-q+.nl-q{margin-top:32px}
+.nl-q blockquote{margin:0 0 18px;font-family:var(--nl-it);font-style:italic;font-size:clamp(28px,3.3vw,40px);line-height:1.08;letter-spacing:-.01em;white-space:pre-line}
+.nl-q p{font-family:var(--f-serif);font-size:14.5px;line-height:1.75;margin-bottom:10px;max-width:34ch}
+/* 기사 한 편 */
+.nl-e{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:20px;align-items:start}
+.nl-e.no-ph{grid-template-columns:1fr}
+.nl-e h3{font-family:var(--f-body);font-weight:700;font-size:clamp(17px,1.6vw,20px);line-height:1.35;letter-spacing:-.02em;margin:6px 0 8px}
+.nl-e p{font-size:13.5px;line-height:1.75}
+.nl-more{display:inline-block;margin-top:10px;font-family:var(--nl-mono);font-size:11px;letter-spacing:.06em;border-bottom:1px solid currentColor}
+.nl-more:hover{color:var(--nl-blue)}
+.nl-ph{display:block;overflow:hidden;background:#dcd8ce}
+.nl-ph img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;transition:transform .5s}
+.nl-ph:hover img{transform:scale(1.03)}
+.nl-sp{display:grid;gap:22px}
+.nl-sp .nl-e+.nl-e{border-top:1px solid var(--ink);padding-top:20px}
+.nl-sp .nl-e .nl-ph img{aspect-ratio:3/4}
+.nl-sp .nl-e h3{font-size:clamp(19px,1.9vw,23px)}
+/* What's New 큰 기사 */
+.nl-f{display:grid;grid-template-columns:minmax(0,54%) minmax(0,1fr);gap:clamp(20px,3vw,32px);align-items:start}
+.nl-f .nl-ph img{aspect-ratio:4/3}
+.nl-f h3.big{font-family:var(--nl-lat);font-weight:700;color:var(--nl-blue);font-size:clamp(28px,3.4vw,42px);line-height:1.08;letter-spacing:-.04em;margin:8px 0 14px}
+.nl-f h3.big a:hover{color:var(--ink)}
+.nl-f p{font-size:14px;line-height:1.8}
+.nl-list{list-style:none;margin:18px 0 0;padding:0;border-top:1.5px solid var(--ink)}
+.nl-list li{font-size:13px;line-height:1.5;padding:9px 0;border-bottom:.75px solid var(--ink)}
+.nl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px;margin-top:clamp(24px,3vw,36px)}
+.nl-f+.nl-grid{padding-top:clamp(24px,3vw,32px);border-top:.75px solid var(--ink)}
+.update .nl-grid{margin-top:0}
+.nl-grid .nl-e h3{font-family:var(--nl-lat),var(--f-body);font-weight:700}
+.nl-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:16px;font-family:var(--nl-mono);font-size:11px;letter-spacing:.08em;color:var(--nl-mute)}
+.nl-foot .share{display:flex;gap:10px;align-items:center}
+.nl-foot button{font:inherit;color:var(--ink);background:none;border:1px solid var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.nl-foot button:hover{background:var(--ink);color:#fff}
+.nl-foot a{color:var(--ink);border-bottom:1px solid currentColor}
+@media (max-width:860px){
+  .nl-row.split,.nl-f{grid-template-columns:1fr}
+  .nl-row.split .pick{padding-right:0;border-right:0;border-bottom:1px solid var(--ink)}
+  .nl-row.split .special{padding-left:0}
+  .nl-grid{grid-template-columns:1fr}
+}
+@media (max-width:520px){.nl-e{grid-template-columns:1fr}.nl-sp .nl-e .nl-ph img{aspect-ratio:4/3}}
+.nl-foot .share{border:0;padding:0;margin:0}
+/* 소식지 PDF에서 가져온 사진의 둥근 모서리가 보이지 않게 살짝 확대 */
+.nl-ph img{transform:scale(1.07)}
+.nl-ph:hover img{transform:scale(1.1)}

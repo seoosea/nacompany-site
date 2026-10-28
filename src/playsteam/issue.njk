@@ -9,17 +9,103 @@ eleventyComputed:
   title: "PLAYSTEAM {{ g.issue }}"
   description: "나컴퍼니 소식지 PLAYSTEAM {{ g.issue }}에 실린 기사"
 ---
-<section class="page"><div class="wrap">
-  <header class="issue-h">
-    <p class="masthead">PLAYSTEAM</p>
-    <div class="edition mono"><span>{{ g.issue }}</span><span>주식회사 나컴퍼니 · 대전 · 울산</span><span>기사 {{ g.items.length }}편</span></div>
+{#- 소식지 한 호를 지면처럼 보여 주는 페이지. 기사의 '코너' 값으로 칸이 나뉩니다. -#}
+{%- macro kicker(a) -%}
+<span class="nl-k">{{ a.date | dotDate }}{% if a.data.region %} · {{ a.data.region }}{% endif %}{% if a.data.category and a.data.category != a.data.corner %} · {{ a.data.category }}{% endif %}</span>
+{%- endmacro -%}
+{%- macro pic(a, cls) -%}
+{%- set b = a.data.block or {} -%}{%- set p = b | firstPhoto -%}
+{%- if p -%}<a class="nl-ph {{ cls }}" href="{{ a.url }}"><img src="{{ p }}" alt="{{ b.photos[0].alt or '' }}" loading="lazy" style="object-position:center {{ b | firstFocus }}"></a>{%- endif -%}
+{%- endmacro -%}
+{%- macro entry(a, cls) -%}
+{%- set b = a.data.block or {} -%}
+<article class="nl-e {{ cls }}{% if not (b | firstPhoto) %} no-ph{% endif %}">
+  {{ pic(a, '') }}
+  <div class="nl-t">
+    {{ kicker(a) }}
+    <h3><a href="{{ a.url }}">{{ a.data.title }}</a></h3>
+    <p>{{ a.data.summary or (b.body | bodyLead | excerpt(90)) }}</p>
+    <a class="nl-more" href="{{ a.url }}">기사 읽기 →</a>
+  </div>
+</article>
+{%- endmacro -%}
+{%- macro feature(a) -%}
+{%- set b = a.data.block or {} -%}{%- set lines = b.body | bodyLines -%}
+<article class="nl-f">
+  {{ pic(a, 'big') }}
+  <div class="nl-t">
+    {{ kicker(a) }}
+    <h3 class="big"><a href="{{ a.url }}">{{ a.data.title }}</a></h3>
+    <p>{{ b.body | bodyLead }}</p>
+    {% if lines.length %}<ul class="nl-list">{% for l in lines %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+    <a class="nl-more" href="{{ a.url }}">기사 읽기 →</a>
+  </div>
+</article>
+{%- endmacro -%}
+{%- set picks = g.items | byCorner("Editor's Pick") -%}
+{%- set specials = g.items | byCorner("Special Class") -%}
+{%- set news = g.items | byCorner("What's New") | featureFirst -%}
+{%- set updates = g.items | byCorner("Update") -%}
+{%- set others = g.items | otherCorners -%}
+{%- set n = 0 -%}
+<section class="nl"><div class="nl-w">
+  <header class="nl-head">
+    <div class="nl-strip"><span>NA COMPANY, LTD. — 계간 소식지</span><span>{{ g.issue | upper }}</span></div>
+    <h1 class="nl-mast">PLAYSTEAM</h1>
+    <div class="nl-sub"><span>묻고, 판단하고, 해낸다.</span><span>기사 {{ g.items.length }}편</span></div>
   </header>
-  <div class="wall" data-wall>
-    {%- for a in g.items -%}{%- set i = loop.index0 -%}{%- set hideAttr = '' -%}{% include "brick.njk" %}{%- endfor -%}
+
+  {% if picks.length or specials.length %}
+  <div class="nl-row{% if picks.length and specials.length %} split{% endif %}">
+    {% if picks.length %}
+    <section class="nl-s pick">
+      <h2 class="nl-l"><b>01</b>Editor's Pick</h2>
+      {% for a in picks %}{%- set b = a.data.block or {} -%}
+      <a class="nl-q" href="{{ a.url }}">
+        <blockquote lang="en">{{ b.body or a.data.summary }}</blockquote>
+        {% if b.quote %}<p>{{ b.quote }}</p>{% endif %}
+        {% if b.quote_by %}<span class="nl-k">— {{ b.quote_by }}</span>{% endif %}
+      </a>
+      {% endfor %}
+    </section>
+    {% endif %}
+    {% if specials.length %}
+    <section class="nl-s special">
+      <h2 class="nl-l"><b>{{ '02' if picks.length else '01' }}</b>Special Class</h2>
+      <div class="nl-sp">
+        {% for a in specials %}{{ entry(a, 'stack') }}{% endfor %}
+      </div>
+    </section>
+    {% endif %}
   </div>
-  <div class="share issue-share">
-    <button type="button" id="copyLink">이 호 링크 복사</button>
-    <span class="done" id="copyDone" role="status" hidden></span>
+  {% endif %}
+
+  {%- set n = (1 if picks.length else 0) + (1 if specials.length else 0) -%}
+  {% if news.length %}{%- set n = n + 1 -%}
+  <section class="nl-s news">
+    <h2 class="nl-l"><b>0{{ n }}</b>What's New</h2>
+    {{ feature(news[0]) }}
+    {% if news.length > 1 %}<div class="nl-grid">{% for a in news %}{% if not loop.first %}{{ entry(a, 'row') }}{% endif %}{% endfor %}</div>{% endif %}
+  </section>
+  {% endif %}
+
+  {% if updates.length %}{%- set n = n + 1 -%}
+  <section class="nl-s update">
+    <h2 class="nl-l"><b>0{{ n }}</b>Update</h2>
+    <div class="nl-grid">{% for a in updates %}{{ entry(a, 'row') }}{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  {% if others.length %}{%- set n = n + 1 -%}
+  <section class="nl-s">
+    <h2 class="nl-l"><b>0{{ n }}</b>More</h2>
+    <div class="nl-grid">{% for a in others %}{{ entry(a, 'row') }}{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  <footer class="nl-foot">
+    <span>PLAYSTEAM · NA COMPANY, LTD.</span>
+    <span class="share"><button type="button" id="copyLink">이 호 링크 복사</button><span class="done" id="copyDone" role="status" hidden></span></span>
     <a href="/playsteam/">지난 호 모두 보기 →</a>
-  </div>
+  </footer>
 </div></section>

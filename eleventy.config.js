@@ -43,6 +43,16 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("issueSlug", slugIssue);
+
+  // 첫 화면 순서: 회사 소식(기관 교육·연수 등)이 위, 학원·대회 소식이 아래. 각 묶음 안에서는 최신순
+  const COMPANY = ["회사 소개", "기관 교육", "교사 연수", "교육청", "행사 운영", "진로", "교육 기술"];
+  const isCompany = (a) =>
+    a.data.group ? a.data.group === "company" : a.data.kind === "about" || COMPANY.includes(a.data.category);
+  eleventyConfig.addFilter("companyFirst", (items) => {
+    const list = items || [];
+    return [...list.filter(isCompany), ...list.filter((a) => !isCompany(a))];
+  });
+  eleventyConfig.addFilter("companyCount", (items) => (items || []).filter(isCompany).length);
   eleventyConfig.addFilter("without", (items, x) => (items || []).filter((a) => !x || a.url !== x.url));
 
   // 지금 1면에 올라갈 기사 (고정 켜짐 + 기간이 안 지남). 여러 개면 가장 최근 것.
@@ -87,6 +97,28 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter("firstFocus", (block) =>
     block && block.photos && block.photos[0] ? block.photos[0].focus || "center" : "center"
+  );
+
+  // 소식지 호 페이지: 코너별로 나누기
+  const CORNERS = ["Editor's Pick", "Special Class", "What's New", "Update"];
+  eleventyConfig.addFilter("byCorner", (items, c) => (items || []).filter((a) => a.data.corner === c));
+  eleventyConfig.addFilter("otherCorners", (items) => (items || []).filter((a) => !CORNERS.includes(a.data.corner)));
+  // 큰 사진 기사(없으면 사진 있는 첫 기사)를 맨 앞으로
+  eleventyConfig.addFilter("featureFirst", (items) => {
+    const list = [...(items || [])];
+    const hasPic = (a) => a.data.block && a.data.block.photos && a.data.block.photos.length;
+    // 사진 있는 '큰 사진' 기사 중 본문이 가장 긴 것(수상 목록이 많은 기사)
+    const len = (a) => String(a.data.block.body || "").length + (a.data.block.type === "big" ? 1e5 : 0);
+    let i = -1;
+    list.forEach((a, k) => { if (hasPic(a) && (i < 0 || len(a) > len(list[i]))) i = k; });
+    if (i > 0) list.unshift(list.splice(i, 1)[0]);
+    return list;
+  });
+  // 본문 첫 문단 / 나머지 줄(수상 목록 등)
+  const paras = (t) => String(t || "").trim().split(/\n\s*\n/);
+  eleventyConfig.addFilter("bodyLead", (t) => paras(t)[0] || "");
+  eleventyConfig.addFilter("bodyLines", (t) =>
+    paras(t).slice(1).join("\n").split("\n").map((s) => s.trim()).filter(Boolean)
   );
 
   return {

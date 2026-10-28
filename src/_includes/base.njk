@@ -23,14 +23,14 @@
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Anton&family=Noto+Serif+KR:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Lexend:wght@400;700;800&family=Instrument+Serif:ital@0;1&family=Anton&family=Noto+Serif+KR:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
 <a class="skip" href="#main">본문으로 바로가기</a>
 <span class="side" aria-hidden="true">PLAYSTEAM<i>●</i>{{ latestIssue or "MAGAZINE" }}</span>
 <header class="top"><div class="wrap">
-  <a class="logo" href="/"><b>NA COMPANY<i></i></b>{% if latestIssue %}<span>PLAYSTEAM {{ latestIssue }}</span>{% endif %}</a>
+  <a class="logo" href="/"><b>NA COMPANY<i></i></b></a>
   <nav aria-label="주요 메뉴">
     <a href="/about/" {% if page.url and page.url.startsWith('/about') %}aria-current="page"{% endif %}>회사 소개</a>
     <a href="/programs/" {% if page.url == '/programs/' %}aria-current="page"{% endif %}>맡길 수 있는 교육</a>
