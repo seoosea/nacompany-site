@@ -368,3 +368,31 @@ img{display:block;max-width:100%}
   .n4 .wt:first-child,.n3 .wt:first-child{padding-left:0}
 }
 @media (max-width:1000px) and (min-width:641px){.watch-list.n4{grid-template-columns:repeat(2,minmax(0,1fr))}.n4 .wt{border-top:0}.n4 .wt:nth-child(n+3){border-top:1px solid var(--rule)}.n4 .wt:nth-child(even){border-left:1px solid var(--rule);padding-left:20px}}
+
+/* 변화 읽기: 아래 벽과 같은 칸·간격으로 (칸 수는 main.js가 data-cols로 알려 줌) */
+.watch-list[data-cols]{display:grid;column-gap:28px;row-gap:0;grid-template-columns:repeat(var(--wc,4),minmax(0,1fr));overflow:visible}
+.watch-list[data-cols="5"]{--wc:5}.watch-list[data-cols="4"]{--wc:4}.watch-list[data-cols="3"]{--wc:3}.watch-list[data-cols="2"]{--wc:2}
+.watch-list[data-cols] .wt{border:0;padding:20px 0 22px;grid-column:span 1;flex:none}
+.watch-list[data-cols] .wt:hover{background:none}
+/* 2개일 때 칸 나누기: 5칸=3+2, 4칸=2+2, 3칸=2+1, 2칸=1+1 */
+.watch-list.n2[data-cols="5"] .wt:first-child{grid-column:span 3}
+.watch-list.n2[data-cols="5"] .wt:last-child{grid-column:span 2}
+.watch-list.n2[data-cols="4"] .wt{grid-column:span 2}
+.watch-list.n2[data-cols="3"] .wt:first-child{grid-column:span 2}
+/* 4개일 때 5칸이면 첫 칸만 2칸 */
+.watch-list.n4[data-cols="5"] .wt:first-child{grid-column:span 2}
+/* 넓은 칸(2칸 이상)에서만 그림 왼쪽·글 오른쪽, 좁은 칸은 위아래 */
+.watch-list[data-cols] .wt{grid-template-columns:1fr}
+.watch-list[data-cols] .wt>*,.watch-list[data-cols] .wt-img{grid-column:1;grid-row:auto}
+.watch-list[data-cols] .wt-img{aspect-ratio:16/10}
+.watch-list.n2[data-cols="5"] .wt:has(.wt-img),.watch-list.n2[data-cols="4"] .wt:has(.wt-img),.watch-list.n2[data-cols="3"] .wt:first-child:has(.wt-img),.watch-list.n4[data-cols="5"] .wt:first-child:has(.wt-img){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.watch-list.n2[data-cols="5"] .wt:has(.wt-img)>*,.watch-list.n2[data-cols="4"] .wt:has(.wt-img)>*,.watch-list.n2[data-cols="3"] .wt:first-child:has(.wt-img)>*,.watch-list.n4[data-cols="5"] .wt:first-child:has(.wt-img)>*{grid-column:2}
+.watch-list.n2[data-cols="5"] .wt-img,.watch-list.n2[data-cols="4"] .wt-img,.watch-list.n2[data-cols="3"] .wt:first-child .wt-img,.watch-list.n4[data-cols="5"] .wt:first-child .wt-img{grid-column:1;grid-row:1 / span 8;aspect-ratio:4/3}
+@media (max-width:680px){.watch-list[data-cols]{column-gap:16px}}
+@media (max-width:420px){.watch-list[data-cols="2"]{grid-template-columns:1fr}.watch-list[data-cols="2"] .wt+.wt{border-top:1px solid var(--rule)}}
+.watch-list[data-cols] .wt>.wt-img{grid-column:1 !important}
+/* 넓은 칸은 바깥 칸을 그대로 이어받아(subgrid) 그림 = 아래 기사 한 칸 너비 */
+@supports (grid-template-columns:subgrid){
+  .watch-list.n2[data-cols="5"] .wt:has(.wt-img),.watch-list.n2[data-cols="4"] .wt:has(.wt-img),.watch-list.n2[data-cols="3"] .wt:first-child:has(.wt-img),.watch-list.n4[data-cols="5"] .wt:first-child:has(.wt-img){grid-template-columns:subgrid;column-gap:28px}
+  .watch-list.n2[data-cols="5"] .wt:has(.wt-img)>*,.watch-list.n2[data-cols="4"] .wt:has(.wt-img)>*,.watch-list.n2[data-cols="3"] .wt:first-child:has(.wt-img)>*,.watch-list.n4[data-cols="5"] .wt:first-child:has(.wt-img)>*{grid-column:2 / -1}
+}

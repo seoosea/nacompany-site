@@ -47,7 +47,7 @@ permalink: /
     <h2><span class="dot"></span>{{ trends.title }}</h2>
     {% if trends.intro %}<p>{{ trends.intro }}</p>{% endif %}
   </div>
-  <div class="watch-list n{{ tw.length }}">
+  <div class="watch-list n{{ tw.length }}" data-watch>
     {% for t in tw %}
     <a class="wt{% if t.quote %} has-q{% endif %}" href="{{ t.url }}" target="_blank" rel="noopener">
       {% if t.image %}<span class="wt-img"><img src="{{ t.image }}" alt="" loading="lazy"></span>{% endif %}

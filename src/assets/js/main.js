@@ -67,3 +67,15 @@
     catch (e) { show(url); }
   });
 })();
+
+// 변화 읽기 칸: 아래 기사 벽과 같은 칸 수로 맞춰서 세로 경계가 어긋나지 않게
+(function () {
+  var list = document.querySelector("[data-watch]");
+  if (!list) return;
+  function set() {
+    var w = list.clientWidth;
+    list.setAttribute("data-cols", w >= 1450 ? 5 : w >= 1000 ? 4 : w >= 640 ? 3 : 2);
+  }
+  set();
+  window.addEventListener("resize", set);
+})();
