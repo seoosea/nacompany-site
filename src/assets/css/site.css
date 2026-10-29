@@ -369,6 +369,8 @@ img{display:block;max-width:100%}
 }
 @media (max-width:1000px) and (min-width:641px){.watch-list.n4{grid-template-columns:repeat(2,minmax(0,1fr))}.n4 .wt{border-top:0}.n4 .wt:nth-child(n+3){border-top:1px solid var(--rule)}.n4 .wt:nth-child(even){border-left:1px solid var(--rule);padding-left:20px}}
 
+/* 휴대폰: 기사는 한 줄에 하나씩 */
+@media (max-width:520px){.wall{grid-template-columns:1fr}}
 /* 변화 읽기: 아래 벽과 같은 칸·간격으로 (칸 수는 main.js가 data-cols로 알려 줌) */
 .watch-list[data-cols]{display:grid;column-gap:28px;row-gap:0;grid-template-columns:repeat(var(--wc,4),minmax(0,1fr));overflow:visible}
 .watch-list[data-cols="5"]{--wc:5}.watch-list[data-cols="4"]{--wc:4}.watch-list[data-cols="3"]{--wc:3}.watch-list[data-cols="2"]{--wc:2}
@@ -396,3 +398,5 @@ img{display:block;max-width:100%}
   .watch-list.n2[data-cols="5"] .wt:has(.wt-img),.watch-list.n2[data-cols="4"] .wt:has(.wt-img),.watch-list.n2[data-cols="3"] .wt:first-child:has(.wt-img),.watch-list.n4[data-cols="5"] .wt:first-child:has(.wt-img){grid-template-columns:subgrid;column-gap:28px}
   .watch-list.n2[data-cols="5"] .wt:has(.wt-img)>*,.watch-list.n2[data-cols="4"] .wt:has(.wt-img)>*,.watch-list.n2[data-cols="3"] .wt:first-child:has(.wt-img)>*,.watch-list.n4[data-cols="5"] .wt:first-child:has(.wt-img)>*{grid-column:2 / -1}
 }
+.watch-list[data-cols="1"]{--wc:1}
+.watch-list[data-cols="1"] .wt+.wt{border-top:1px solid var(--rule)}

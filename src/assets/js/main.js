@@ -29,7 +29,7 @@
     var items = [].slice.call(wall.children).filter(function (el) { return !el.classList.contains("col"); });
     function count() {
       var w = wall.clientWidth;
-      return w >= 1450 ? 5 : w >= 1000 ? 4 : w >= 640 ? 3 : 2;
+      return w >= 1450 ? 5 : w >= 1000 ? 4 : w >= 640 ? 3 : w >= 480 ? 2 : 1;
     }
     var last = 0;
     function layout() {
@@ -74,7 +74,7 @@
   if (!list) return;
   function set() {
     var w = list.clientWidth;
-    list.setAttribute("data-cols", w >= 1450 ? 5 : w >= 1000 ? 4 : w >= 640 ? 3 : 2);
+    list.setAttribute("data-cols", w >= 1450 ? 5 : w >= 1000 ? 4 : w >= 640 ? 3 : w >= 480 ? 2 : 1);
   }
   set();
   window.addEventListener("resize", set);
