@@ -220,6 +220,33 @@ collections:
           - { name: naver_verification, label: 네이버 서치어드바이저 확인 코드, widget: string, required: false, hint: "네이버에서 받은 meta 태그의 content 값만 붙여 넣기" }
           - { name: google_verification, label: 구글 서치 콘솔 확인 코드, widget: string, required: false }
 
+      - name: trends
+        label: 첫 화면 '지금, 변화 읽기' (정책 · 사람 · 기술 소식)
+        file: src/_data/trends.json
+        format: json
+        fields:
+          - { name: title, label: 칸 제목, widget: string, maxlength: 16 }
+          - { name: intro, label: 칸 설명, widget: text, maxlength: 80, required: false }
+          - name: items
+            label: 소식
+            widget: list
+            required: false
+            summary: "{{date}} · {{kind}} · {{title}}"
+            hint: "가장 최근 날짜 4개가 첫 화면에 나옵니다. 남의 기사를 옮기지 말고, 내 말로 짧게 줄인 뒤 원문 주소를 붙여 주세요. 비어 있으면 칸이 숨겨집니다"
+            fields:
+              - name: kind
+                label: 종류
+                widget: select
+                options: [정책, 사람, 기술, 교육 현장, 숫자]
+              - { name: date, label: 날짜, widget: datetime, time_format: false, date_format: "YYYY.MM.DD", format: "YYYY-MM-DD" }
+              - { name: image, label: 그림 (선택), widget: image, required: false, hint: "AI로 만든 그림이나 공공누리 사진. 실제 인물 얼굴·회사 로고는 넣지 마세요" }
+              - { name: title, label: 제목, widget: string, maxlength: 26 }
+              - { name: text, label: 한 줄 요약 (내 말로), widget: string, maxlength: 45 }
+              - { name: quote, label: 인용 한마디 (사람 소식일 때), widget: string, maxlength: 40, required: false, hint: "실제로 한 말 그대로만. 출처 주소를 꼭 함께 넣어 주세요" }
+              - { name: who, label: 누가 (이름 · 직함), widget: string, maxlength: 30, required: false }
+              - { name: source, label: 출처 이름, widget: string, maxlength: 20, hint: "예: 교육부 보도자료, ○○일보" }
+              - { name: url, label: 원문 주소, widget: string }
+
       - name: boxes
         label: 첫 화면 정보 칸 (교육 의뢰 · 구독 등)
         file: src/_data/boxes.json

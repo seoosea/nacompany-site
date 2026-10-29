@@ -114,6 +114,11 @@ export default function (eleventyConfig) {
   };
   eleventyConfig.addFilter("phil", phil);
 
+  // 변화 읽기: 날짜 최신순 n개
+  eleventyConfig.addFilter("latestTrends", (items, n = 4) =>
+    [...(items || [])].sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, n)
+  );
+
   // 첫 화면: Editor's Pick은 가장 최근 것 하나만
   eleventyConfig.addFilter("latestPickOnly", (items) => {
     let seen = false;
