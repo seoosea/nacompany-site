@@ -38,8 +38,8 @@ img{display:block;max-width:100%}
 .top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--ink);padding-top:env(safe-area-inset-top,0px)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .logo{display:flex;align-items:baseline;gap:12px;white-space:nowrap}
-.logo b{font-family:var(--f-num);font-weight:400;font-size:26px;letter-spacing:.02em;line-height:1}
-.logo b i{display:inline-block;width:.3em;height:.3em;border-radius:50%;background:var(--coral);margin-left:.08em}
+.logo b{font-family:"Lexend",var(--f-body);font-weight:800;font-size:25px;letter-spacing:-.02em;line-height:1}
+.logo b i{display:inline-block;width:.28em;height:.28em;border-radius:50%;background:var(--coral);margin-left:.1em}
 .logo span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
 .top nav{display:flex;gap:22px;font-size:14px;font-weight:500}
 .top nav a:hover,.top nav a[aria-current]{color:var(--blue)}
