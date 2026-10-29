@@ -38,7 +38,7 @@ img{display:block;max-width:100%}
 .top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--ink);padding-top:env(safe-area-inset-top,0px)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .logo{display:flex;align-items:baseline;gap:12px;white-space:nowrap}
-.logo b{font-family:"Lexend",var(--f-body);font-weight:800;font-size:25px;letter-spacing:-.02em;line-height:1}
+.logo b{font-family:"Lexend",var(--f-body);font-weight:800;font-size:25px;letter-spacing:.03em;line-height:1}
 .logo b i{display:inline-block;width:.28em;height:.28em;border-radius:50%;background:var(--coral);margin-left:.1em}
 .logo span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
 .top nav{display:flex;gap:22px;font-size:14px;font-weight:500}
@@ -343,3 +343,28 @@ img{display:block;max-width:100%}
   .wt,.wt:nth-child(3){flex:0 0 78%;scroll-snap-align:start;border-left:1px solid var(--rule);padding-left:16px;border-top:0}
   .wt:first-child{padding-left:0;border-left:0}
 }
+
+/* 변화 읽기: 2개만, 가로형 카드, 아래 칸과 점선으로 이어지게 */
+.watch-list{grid-template-columns:repeat(2,minmax(0,1fr));border-bottom:1.5px dashed var(--ink)}
+.wt{display:grid;grid-template-columns:minmax(0,40%) minmax(0,1fr);grid-auto-rows:min-content;column-gap:20px;row-gap:8px;min-height:0;padding:20px 24px 22px}
+.wt>*{grid-column:2}
+.wt-img{grid-column:1;grid-row:1 / span 8;margin:0;aspect-ratio:4/3}
+.wt:not(:has(.wt-img)){grid-template-columns:1fr}
+.wt:not(:has(.wt-img))>*{grid-column:1}
+.wt-src{margin-top:4px}
+.wt:nth-child(3){border-left:1px solid var(--rule);padding-left:24px}
+.watch+.feed{padding-top:0}
+.watch+.feed .feed-h{border-top:0;padding-top:22px}
+@media (max-width:1000px){.watch-list{grid-template-columns:1fr}.wt{border-left:0;padding-left:0;padding-right:0}.wt+.wt{border-top:1px solid var(--rule)}}
+@media (max-width:640px){.watch-list{display:grid}.wt{grid-template-columns:1fr;flex:none}.wt>*,.wt-img{grid-column:1;grid-row:auto}}
+
+/* 변화 읽기 4개일 때: 세로형 카드 네 칸 */
+@media (min-width:1001px){
+  .watch-list.n4,.watch-list.n3{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .watch-list.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .n4 .wt,.n3 .wt{grid-template-columns:1fr;padding:18px 20px 20px}
+  .n4 .wt>*,.n4 .wt-img,.n3 .wt>*,.n3 .wt-img{grid-column:1;grid-row:auto}
+  .n4 .wt-img,.n3 .wt-img{aspect-ratio:16/10}
+  .n4 .wt:first-child,.n3 .wt:first-child{padding-left:0}
+}
+@media (max-width:1000px) and (min-width:641px){.watch-list.n4{grid-template-columns:repeat(2,minmax(0,1fr))}.n4 .wt{border-top:0}.n4 .wt:nth-child(n+3){border-top:1px solid var(--rule)}.n4 .wt:nth-child(even){border-left:1px solid var(--rule);padding-left:20px}}

@@ -114,10 +114,14 @@ export default function (eleventyConfig) {
   };
   eleventyConfig.addFilter("phil", phil);
 
-  // 변화 읽기: 날짜 최신순 n개
-  eleventyConfig.addFilter("latestTrends", (items, n = 4) =>
-    [...(items || [])].sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, n)
-  );
+  // 변화 읽기: '첫 화면에 고정'을 켠 소식이 먼저, 나머지는 날짜 최신순. 모두 n개까지
+  eleventyConfig.addFilter("latestTrends", (items, n = 2) => {
+    const byDate = (a, b) => String(b.date).localeCompare(String(a.date));
+    const list = [...(items || [])];
+    const pinned = list.filter((t) => t.pin).sort(byDate);
+    const rest = list.filter((t) => !t.pin).sort(byDate);
+    return [...pinned, ...rest].slice(0, Number(n) || 2);
+  });
 
   // 첫 화면: Editor's Pick은 가장 최근 것 하나만
   eleventyConfig.addFilter("latestPickOnly", (items) => {

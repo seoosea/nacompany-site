@@ -227,17 +227,23 @@ collections:
         fields:
           - { name: title, label: 칸 제목, widget: string, maxlength: 16 }
           - { name: intro, label: 칸 설명, widget: text, maxlength: 80, required: false }
+          - name: count
+            label: 첫 화면에 몇 개 보일까요
+            widget: select
+            options: [{ label: "2개 (가로로 넓게)", value: 2 }, { label: "4개 (세로로 좁게)", value: 4 }]
+            default: 2
           - name: items
             label: 소식
             widget: list
             required: false
             summary: "{{date}} · {{kind}} · {{title}}"
-            hint: "가장 최근 날짜 4개가 첫 화면에 나옵니다. 남의 기사를 옮기지 말고, 내 말로 짧게 줄인 뒤 원문 주소를 붙여 주세요. 비어 있으면 칸이 숨겨집니다"
+            hint: "'첫 화면에 고정'을 켠 소식이 먼저 나오고, 남는 자리는 최근 날짜순으로 채워집니다. 남의 기사를 옮기지 말고, 내 말로 짧게 줄인 뒤 원문 주소를 붙여 주세요. 비어 있으면 칸이 숨겨집니다"
             fields:
               - name: kind
                 label: 종류
                 widget: select
                 options: [정책, 사람, 기술, 교육 현장, 숫자]
+              - { name: pin, label: 첫 화면에 고정, widget: boolean, default: false, required: false, hint: "켜면 날짜와 상관없이 첫 화면에 나옵니다" }
               - { name: date, label: 날짜, widget: datetime, time_format: false, date_format: "YYYY.MM.DD", format: "YYYY-MM-DD" }
               - { name: image, label: 그림 (선택), widget: image, required: false, hint: "AI로 만든 그림이나 공공누리 사진. 실제 인물 얼굴·회사 로고는 넣지 마세요" }
               - { name: title, label: 제목, widget: string, maxlength: 26 }

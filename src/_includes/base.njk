@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Lexend:wght@400;700;800&family=Instrument+Serif:ital@0;1&family=Anton&family=Noto+Serif+KR:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v={{ build.v }}">
 </head>
 <body>
 <a class="skip" href="#main">본문으로 바로가기</a>
@@ -51,6 +51,6 @@
   <span>{{ site.name }} · 대전 본사 · 울산 교육센터{% if site.business.ceo %} · 대표 {{ site.business.ceo }}{% endif %}{% if site.business.reg_no %} · 사업자등록번호 {{ site.business.reg_no }}{% endif %}</span>
   <span class="mono">© {{ build.year }} Na Company, Ltd.</span>
 </div></footer>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js?v={{ build.v }}"></script>
 </body>
 </html>

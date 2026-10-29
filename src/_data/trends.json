@@ -1,6 +1,7 @@
 {
   "title": "지금, 변화 읽기",
   "intro": "AI와 교육이 빠르게 바뀌고 있습니다. 나컴퍼니가 눈여겨보는 정책·사람·기술 소식을 골라 짧게 전합니다.",
+  "count": 2,
   "items": [
     {
       "kind": "숫자",
@@ -34,7 +35,8 @@
       "who": "데미스 허사비스 · 구글 딥마인드 CEO",
       "source": "AP 통신",
       "url": "https://www.news4jax.com/tech/2025/09/12/googles-top-ai-scientist-says-learning-how-to-learn-will-be-next-generations-most-needed-skill/",
-      "image": "/assets/uploads/chatgpt-image-2025년-10월-2일-오전-11_14_04.webp"
+      "image": "/assets/uploads/chatgpt-image-2025년-10월-2일-오전-11_14_04.webp",
+      "pin": true
     }
   ]
 }
