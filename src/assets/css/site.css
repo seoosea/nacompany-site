@@ -4,8 +4,8 @@
   --paper:#fbfaf6; --sheet:#ffffff; --ink:#16171d; --muted:#6a6862; --rule:#e2ded4;
   --blue:#3b8fcf; --deep:#1c4a8c; --coral:#ff8060;
   --f-display:"Black Han Sans","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --f-num:"Anton","Impact","Arial Narrow",sans-serif;
-  --f-serif:"Noto Serif KR","AppleMyungjo","Batang",serif;
+  --f-num:"Lexend","IBM Plex Sans KR",sans-serif;
+  --f-serif:var(--f-body); /* 명조체는 쓰지 않음: 문장은 모두 본문체 */
   --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   color-scheme:light;
@@ -400,3 +400,29 @@ img{display:block;max-width:100%}
 }
 .watch-list[data-cols="1"]{--wc:1}
 .watch-list[data-cols="1"] .wt+.wt{border-top:1px solid var(--rule)}
+
+/* 변화 읽기: 제목과 소식 사이는 점선(한 묶음), 아래 '나컴퍼니가 한 일' 위는 실선 */
+.watch-list{border-top:1.5px dashed var(--ink);border-bottom:1px solid var(--ink)}
+/* 지난 호 표지: 목록 맨 위·맨 아래만 실선, 사이는 점선 */
+.iss li{border-bottom:1px dashed rgba(22,23,29,.45)}
+.iss li:last-child{border-bottom:1px solid var(--ink)}
+/* 회사 소개: 대상별 탭 */
+.aud-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(28px,3.5vw,40px)}
+.aud-tabs button{font:inherit;font-size:14px;font-weight:500;background:none;border:1px solid var(--ink);border-radius:999px;padding:7px 16px;cursor:pointer;color:var(--ink)}
+.aud-tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.aud-tabs button:hover{border-color:var(--blue);color:var(--blue)}
+.aud-tabs button[aria-selected="true"]:hover{color:#fff;background:var(--blue);border-color:var(--blue)}
+.aud-tabs+.phil-pw,.aud-tabs~.phil-pw{margin-top:20px}
+
+/* ── 서체 규칙 (4가지만) ───────────────────────────
+   제목·인용   : Black Han Sans (--f-display)
+   로고·숫자·영문 큰 글씨 : Lexend (--f-num)
+   문장        : IBM Plex Sans KR (--f-body)
+   날짜·분류 같은 작은 글씨 : IBM Plex Mono (--f-mono)
+   (예외: 소식지 호 페이지의 영어 명언만 Instrument Serif 기울임) */
+.f-num,.brief .big,.steps .n,.masthead,.tile b{font-weight:700;letter-spacing:-.02em}
+.qt blockquote,.wt blockquote{font-family:var(--f-display);font-weight:400}
+.wt blockquote{font-size:clamp(18px,1.6vw,22px);line-height:1.4}
+.wt.has-q h3{font-family:var(--f-body);font-weight:500;font-size:14px;color:var(--ink)}
+.think p{font-weight:500}
+.body,.about-tx .body{font-size:16px;line-height:1.85}

@@ -79,3 +79,16 @@
   set();
   window.addEventListener("resize", set);
 })();
+
+// 회사 소개: 대상별(학생·교사·기관·기업) 세 가지 힘 바꿔 보기
+(function () {
+  var tabs = document.querySelectorAll("[data-aud]");
+  if (!tabs.length) return;
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () {
+      var k = t.getAttribute("data-aud");
+      tabs.forEach(function (x) { x.setAttribute("aria-selected", x === t ? "true" : "false"); });
+      document.querySelectorAll("[data-aud-panel]").forEach(function (p) { p.hidden = p.getAttribute("data-aud-panel") !== k; });
+    });
+  });
+})();

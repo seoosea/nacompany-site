@@ -253,6 +253,22 @@ collections:
               - { name: source, label: 출처 이름, widget: string, maxlength: 20, hint: "예: 교육부 보도자료, ○○일보" }
               - { name: url, label: 원문 주소, widget: string }
 
+      - name: audiences
+        label: 회사 소개 · 대상별 세 가지 힘 (교사 · 기관 · 기업)
+        file: src/_data/audiences.json
+        format: json
+        fields:
+          - name: items
+            label: 대상
+            widget: list
+            summary: "{{name}}"
+            hint: "학생 대상 내용은 PLAYSTEAM 기사의 철학 글에서 고칩니다. 여기는 그 밖의 대상입니다"
+            fields:
+              - { name: name, label: 대상 이름, widget: string, maxlength: 10 }
+              - { name: ask, label: 묻는 힘, widget: text, maxlength: 60 }
+              - { name: judge, label: 판단하는 힘, widget: text, maxlength: 60 }
+              - { name: do, label: 해내는 힘, widget: text, maxlength: 60 }
+
       - name: boxes
         label: 첫 화면 정보 칸 (교육 의뢰 · 구독 등)
         file: src/_data/boxes.json

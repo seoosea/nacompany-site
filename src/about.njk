@@ -20,7 +20,19 @@ permalink: /about/
   <div class="phil-b">
     <p class="phil-lead">{{ ph.lead }}</p>
     {% if ph.leadRest %}<p class="phil-rest">{{ ph.leadRest }}</p>{% endif %}
-    {% if ph.powers.length %}<ol class="phil-pw">{% for p in ph.powers %}<li><span class="n">0{{ loop.index }}</span><h3>{{ p.k }}</h3><p>{{ p.v }}</p></li>{% endfor %}</ol>{% endif %}
+    {% if ph.powers.length %}
+    {%- set auds = audiences.items or [] -%}
+    {% if auds.length %}<div class="aud-tabs" role="tablist" aria-label="대상별 보기">
+      <button type="button" role="tab" aria-selected="true" data-aud="0">학생</button>
+      {% for au in auds %}<button type="button" role="tab" aria-selected="false" data-aud="{{ loop.index }}">{{ au.name }}</button>{% endfor %}
+    </div>{% endif %}
+    <ol class="phil-pw" data-aud-panel="0">{% for p in ph.powers %}<li><span class="n">0{{ loop.index }}</span><h3>{{ p.k }}</h3><p>{{ p.v }}</p></li>{% endfor %}</ol>
+    {% for au in auds %}{%- set ai = loop.index -%}
+    <ol class="phil-pw" data-aud-panel="{{ ai }}" hidden>
+      {% for p in ph.powers %}<li><span class="n">0{{ loop.index }}</span><h3>{{ p.k }}</h3><p>{{ [au.ask, au.judge, au.do][loop.index0] }}</p></li>{% endfor %}
+    </ol>
+    {% endfor %}
+    {% endif %}
     {% for c in ph.close %}<p class="phil-close">{{ c }}</p>{% endfor %}
   </div>
   {% endif %}
