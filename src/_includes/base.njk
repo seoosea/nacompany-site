@@ -37,6 +37,7 @@
     <a href="/about/" {% if page.url and page.url.startsWith('/about') %}aria-current="page"{% endif %}>회사 소개</a>
     <a href="/programs/" {% if page.url == '/programs/' %}aria-current="page"{% endif %}>맡길 수 있는 교육</a>
     <a href="/playsteam/" {% if page.url and page.url.startsWith('/playsteam') %}aria-current="page"{% endif %}>지난 호</a>
+    <a href="/archive/" {% if page.url == '/archive/' %}aria-current="page"{% endif %}>활동 기록</a>
     {% if site.academy_url %}<a href="{{ site.academy_url }}" target="_blank" rel="noopener">학원 ↗</a>{% endif %}
     {% if site.lms_url %}<a href="{{ site.lms_url }}" target="_blank" rel="noopener">LMS ↗</a>{% endif %}
   </nav>

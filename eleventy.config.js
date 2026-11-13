@@ -48,6 +48,23 @@ export default function (eleventyConfig) {
   const COMPANY = ["회사 소개", "기관 교육", "교사 연수", "교육청", "행사 운영", "진로", "교육 기술"];
   const isCompany = (a) =>
     a.data.group ? a.data.group === "company" : a.data.kind === "about" || COMPANY.includes(a.data.category);
+  eleventyConfig.addFilter("isCompany", (a) => isCompany(a));
+  // 첫 화면 기사 벽: '활동 기록에만' 켠 기사는 빼기
+  eleventyConfig.addFilter("homeOnly", (items) => (items || []).filter((a) => !a.data.archive));
+  // 활동 기록: 연도별로 묶기 (최근 연도 먼저)
+  eleventyConfig.addFilter("byYear", (items) => {
+    const m = new Map();
+    for (const a of items || []) {
+      if (a.data.kind === "about" || a.data.corner === "Editor's Pick") continue;
+      const y = a.date.getFullYear();
+      if (!m.has(y)) m.set(y, []);
+      m.get(y).push(a);
+    }
+    return [...m.entries()].sort((x, y) => y[0] - x[0]).map(([year, list]) => ({ year, list }));
+  });
+  // 날짜 표시: '표시할 일시'(when)가 있으면 그것을, 없으면 2026.08.09
+  eleventyConfig.addFilter("shownDate", (a) => a.data.when || new Date(a.date).toISOString().slice(0, 10).replace(/-/g, "."));
+
   eleventyConfig.addFilter("companyFirst", (items) => {
     const list = items || [];
     return [...list.filter(isCompany), ...list.filter((a) => !isCompany(a))];

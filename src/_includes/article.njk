@@ -10,7 +10,7 @@ layout: base.njk
   <div class="wrap">
     <a class="back" href="/">← 최근 기사</a>
     <article class="art{% if t == 'short' %} short{% endif %}">
-      <p class="meta"><b>{{ corner }}</b>{% if issue %}<a href="/playsteam/{{ issue | issueSlug }}/">PLAYSTEAM {{ issue }}</a>{% endif %}<span>{{ category }}{% if region %} · {{ region }}{% endif %}</span>{% if kind != "about" %}<time datetime="{{ page.date | isoDate }}">{{ page.date | dotDate }}</time>{% endif %}</p>
+      <p class="meta"><b>{{ corner }}</b>{% if issue %}<a href="/playsteam/{{ issue | issueSlug }}/">PLAYSTEAM {{ issue }}</a>{% endif %}<span>{{ category }}{% if region %} · {{ region }}{% endif %}</span>{% if kind != "about" %}<time datetime="{{ page.date | isoDate }}">{{ when or (page.date | dotDate) }}</time>{% endif %}</p>
       <h1>{{ title }}</h1>
 
       {% if t == "big" %}

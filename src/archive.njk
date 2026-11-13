@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: 활동 기록
+description: 주식회사 나컴퍼니가 해 온 기관 교육·교사 연수와 PLAYSTEAM의 수업·대회 소식을 해마다 모았습니다.
+permalink: /archive/
+---
+<section class="page"><div class="wrap">
+  <header class="page-h"><span class="badge">ARCHIVE</span><h1>활동 기록</h1><p>나컴퍼니가 기관과 함께한 교육, 그리고 PLAYSTEAM 아이들이 해낸 일을 해마다 모았습니다.</p></header>
+  {% for y in collections.articles | byYear %}
+  <section class="arc-y">
+    <h2 class="arc-yh">{{ y.year }}</h2>
+    <div class="arc-cols">
+      {% for grp in [["company", "기관 교육 · 교사 연수 · 행사"], ["academy", "수업 · 대회 · 학원 소식"]] %}
+      <div class="arc-col">
+        <h3 class="arc-gh">{{ grp[1] }}</h3>
+        <ol>
+        {% for a in y.list %}{% if (a | isCompany) == (grp[0] == "company") %}
+          <li><a href="{{ a.url }}"><span class="arc-d">{{ a | shownDate }}</span><b>{{ a.data.title }}</b>{% if a.data.summary %}<span class="arc-s">{{ a.data.summary }}</span>{% endif %}</a></li>
+        {% endif %}{% endfor %}
+        </ol>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</div></section>

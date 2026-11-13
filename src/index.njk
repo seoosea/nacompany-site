@@ -62,7 +62,7 @@ permalink: /
 </div></section>
 {% endif %}
 
-{%- set list = collections.articles | without(pin) | latestPickOnly | companyFirst -%}
+{%- set list = collections.articles | homeOnly | without(pin) | latestPickOnly | companyFirst -%}
 {%- set nCo = list | companyCount -%}
 <section class="feed"><div class="wrap">
   <div class="feed-h"><h2>나컴퍼니가 한 일</h2><span class="mono">기관 교육 · 교사 연수 · 행사 운영</span></div>

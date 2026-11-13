@@ -8,7 +8,7 @@
   <span class="cat">{{ a.data.corner if a.data.kind == 'about' else a.data.category }}{% if a.data.region %} · {{ a.data.region }}{% endif %}</span>
   <h3>{{ a.data.title }}</h3>
   <p>{{ a.data.summary or (b.body | excerpt(56)) }}</p>
-  {% if a.data.kind != 'about' %}<span class="d">{{ a.date | dotDate }}</span>{% endif %}
+  {% if a.data.kind != 'about' %}<span class="d">{{ a | shownDate }}</span>{% endif %}
 </a>
 {%- elif b.type == 'quote' and b.quote -%}
 <a class="cell qt" href="{{ a.url }}" data-h="1.0"{% if hideAttr %} {{ hideAttr | safe }}{% endif %}>
@@ -18,7 +18,7 @@
 </a>
 {%- else -%}
 <a class="cell brief" href="{{ a.url }}" data-h="0.9"{% if hideAttr %} {{ hideAttr | safe }}{% endif %}>
-  <span class="big">{{ a.date | mmdd }}</span>
+  <span class="big">{{ a.date.getFullYear() if a.data.when else (a.date | mmdd) }}</span>
   <span class="cat">{{ a.data.category }}</span>
   <h3>{{ a.data.title }}</h3>
   <p>{{ a.data.summary or (b.body | excerpt(56)) }}</p>
