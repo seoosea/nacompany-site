@@ -90,8 +90,9 @@ img{display:block;max-width:100%}
 .brief{border-top:3px solid var(--ink);padding-top:12px}
 .feed.academy{padding-top:0;background:transparent}
 .feed+.feed.academy .feed-h{border-top:3px solid var(--ink)}
-.qt{background:none;border:0;padding:6px 0 14px}
-.qt::before{content:"\201C";display:block;font-family:"Instrument Serif",var(--f-serif);font-size:84px;line-height:.62;color:var(--coral);margin-bottom:8px}
+/* Editor's Pick: 채도 낮고 밝은 파랑 회색 면 */
+.qt{background:#e8ecf3;border:0;padding:22px 22px 24px;transition:background .2s}
+.qt:hover{background:#dfe5ef}
 .qt blockquote{margin:0 0 10px;font-family:var(--f-serif);font-weight:700;font-size:clamp(19px,1.7vw,23px);line-height:1.55}
 .qt .by{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
 .qt:hover blockquote{color:var(--blue)}
