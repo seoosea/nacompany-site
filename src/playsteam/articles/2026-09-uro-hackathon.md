@@ -9,8 +9,11 @@ archive: false
 published: true
 summary: 울산세계미래산업박람회(WAVE 2026)에서 열린 해커톤에 참가했습니다.
 block:
-  type: short
-  photos: []
+  type: big
+  photos:
+  - src: /assets/uploads/2026-uro-hackathon.jpg
+    focus: center
+    alt: URO 해커톤에서 심사위원에게 아이디어를 발표하는 학생들
   body: '2026년 9월 12일, 울산세계미래산업박람회(WAVE 2026)에서 열린 울산로봇올림피아드(URO) 해커톤 경제솔루션 부문에 참가했습니다.
 
 
@@ -21,4 +24,5 @@ block:
     대회 : 울산로봇올림피아드(URO) 해커톤
 
     출전 부문 : 경제솔루션'
+card: wide
 ---

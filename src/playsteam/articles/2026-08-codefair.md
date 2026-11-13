@@ -11,6 +11,9 @@ summary: '"AI와 데이터로 해결하는 우리 사회의 문제" — 중등�
 block:
   type: big
   photos:
+  - src: /assets/uploads/2026-codefair-final.jpg
+    focus: center
+    alt: 제8회 한국코드페어 본선 부스에서 작품을 준비하는 학생들
   - src: /assets/uploads/2026-codefair-booth.jpg
     focus: center
     alt: 부스에서 작품을 설명하는 모습
