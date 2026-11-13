@@ -10,9 +10,9 @@ summary: 정규 수업에서 다루기 어려운 심화 주제와 프로젝트�
 block:
   type: big
   photos:
-  - src: /assets/uploads/2026-summer-class-poster.jpg
-    focus: whole
-    alt: 여름방학특강 안내 포스터 — BE·WD·SE·SP 반별 프로젝트
+  - src: /assets/uploads/2026-summer-class-robot.jpg
+    focus: center
+    alt: 레고 놀이기구와 기차를 만들어 움직여 보는 아이
   body: '약 한 달간 방학특강을 진행합니다. 평소 정규 수업에서 다루기 어려운 심화 주제와 프로젝트형 수업으로 구성되어, 방학 동안 실력을 한 단계 끌어올릴 수 있는 기회입니다.
 
 
@@ -26,5 +26,5 @@ block:
     SE (8~10세) : 워터파크, 특급열차
 
     SP (10세 이상) : 해상부유도시, 4번방의 비밀'
-card: square
+card: wide
 ---
