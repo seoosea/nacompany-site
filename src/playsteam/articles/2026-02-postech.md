@@ -10,9 +10,9 @@ summary: 본원 중학생 2명이 POSTECH 영재기업인교육원에 합격했�
 block:
   type: big
   photos:
-  - src: /assets/uploads/2026-postech-camp.jpg
+  - src: /assets/uploads/2026-postech-campus.jpg
     focus: center
-    alt: 포스텍 영재기업인교육원 겨울 집중교육 단체 사진
+    alt: 두 학생이 들어서는 학교 건물 그림
   body: 본원 중학생 2명이 각기 다른 과정 속에서 쌓아 온 경험과 노력으로 POSTECH 영재기업인교육원에 합격했습니다. 포스텍 영재기업인교육원은 창의적 문제 해결과 기업가적 사고를 바탕으로, 아이디어를 실제 가치로 발전시키는 프로젝트 역량을 평가합니다.
 card: wide
 ---
