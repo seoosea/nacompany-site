@@ -4,7 +4,7 @@ layout: base.njk
 {%- set b = block or {} -%}
 {%- set t = b.type or "short" -%}
 {%- macro photo(p, ratio) -%}
-{%- if p and p.src -%}<img class="ph {{ ratio }}" src="{{ p.src }}" alt="{{ p.alt or title }}" style="object-fit:cover;object-position:center {{ p.focus or 'center' }}">{%- endif -%}
+{%- if p and p.src -%}{%- if p.focus == 'whole' -%}<img class="ph whole" src="{{ p.src }}" alt="{{ p.alt or title }}">{%- else -%}<img class="ph {{ ratio }}" src="{{ p.src }}" alt="{{ p.alt or title }}" style="object-fit:cover;object-position:center {{ p.focus or 'center' }}">{%- endif -%}{%- endif -%}
 {%- endmacro -%}
 <div class="article-page">
   <div class="wrap">

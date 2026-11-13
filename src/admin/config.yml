@@ -123,7 +123,7 @@ collections:
                 max: 1
                 fields:
                   - &src { name: src, label: 사진, widget: image }
-                  - &focus { name: focus, label: 잘릴 때 보일 부분, widget: select, options: [{ label: 위, value: top }, { label: 가운데, value: center }, { label: 아래, value: bottom }], default: center, hint: "얼굴이 잘리면 바꿔 보세요" }
+                  - &focus { name: focus, label: 잘릴 때 보일 부분, widget: select, options: [{ label: 위, value: top }, { label: 가운데, value: center }, { label: 아래, value: bottom }, { label: 자르지 않고 전체 보이기 (포스터), value: whole }], default: center, hint: "얼굴이 잘리면 바꿔 보세요. 포스터처럼 글자가 있는 그림은 '전체 보이기'" }
                   - &alt { name: alt, label: 사진 설명, widget: string, required: false, hint: "눈이 불편한 분과 검색엔진을 위한 한 줄 (예: 대회장에서 로봇을 조정하는 학생들)" }
               - { name: body, label: 본문, widget: text, maxlength: 400, hint: "400자 이내 · 빈 줄을 넣으면 새 문단" }
           - name: trio
