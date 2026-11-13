@@ -1,7 +1,7 @@
 ---
 title: 찾아가는 창업체험교육
-issue: ''
-corner: ''
+issue: 2024 Vol.02
+corner: Update
 category: 기관 교육
 region: ''
 date: '2024-11-30'

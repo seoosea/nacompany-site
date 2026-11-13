@@ -1,7 +1,7 @@
 ---
 title: 북삼초 에듀테크 학생 체험캠프
-issue: ''
-corner: ''
+issue: 2025 Vol.01
+corner: Update
 category: 기관 교육
 region: ''
 date: '2024-10-15'

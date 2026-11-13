@@ -1,7 +1,7 @@
 ---
 title: 대구보건고 미래역량강화 학생연수
-issue: ''
-corner: ''
+issue: 2025 Vol.01
+corner: Update
 category: 기관 교육
 region: ''
 date: '2024-12-23'

@@ -1,7 +1,7 @@
 ---
 title: 한국과학영재학교 입학생 인터뷰
-issue: ''
-corner: ''
+issue: 2025 Vol.03
+corner: Special Class
 category: 합격 소식
 region: 울산
 date: '2025-06-15'
@@ -10,8 +10,11 @@ archive: true
 published: true
 summary: 8년 인연의 졸업생 4명과 나눈 이야기.
 block:
-  type: short
-  photos: []
+  type: big
+  photos:
+  - src: /assets/uploads/2025-ksa-interview.jpg
+    focus: center
+    alt: 교구를 지원받아 프로토타입을 만드는 학생들
   body: '2025년 6월, 8년간 플레이스팀과 인연을 맺어 온 한국과학영재학교 신입생이 교내 공모전 프로토타입 제작에 도움을 요청해 찾아왔습니다. 교구와 기술을 지원해 작품 제작을 도왔으며, 한국과학영재학교에 입학한 4명의 학생들과 인터뷰를 진행했습니다.
 
 
@@ -20,4 +23,5 @@ block:
     인터뷰 : 한국과학영재학교 입학생 4명
 
     주제 : “책임감·리더십을 배울 수 있는 플레이스팀”'
+card: wide
 ---
