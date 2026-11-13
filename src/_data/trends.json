@@ -14,6 +14,17 @@
       "url": "https://www.hitech.co.kr/news/articleView.html?idxno=62617"
     },
     {
+      "kind": "사람",
+      "date": "2026-02-03",
+      "title": "AI 시대, '똑똑함'의 정의가 바뀐다",
+      "text": "기술적 예리함에 공감, 말하지 않은 것을 읽는 힘까지 갖춘 사람.",
+      "quote": "모퉁이 너머를 볼 줄 아는 사람이 정말 똑똑한 사람입니다",
+      "who": "젠슨 황 · 엔비디아 CEO",
+      "source": "Upworthy",
+      "url": "https://www.upworthy.com/ai-founder-realized-the-smartest-people-aren-t-the-technical-types-but-something-totally-different/",
+      "pin": true
+    },
+    {
       "kind": "숫자",
       "date": "2026-10-28",
       "title": "학생 77% \"교재 대신 AI 요약\"",
@@ -46,7 +57,7 @@
       "source": "AP 통신",
       "url": "https://www.news4jax.com/tech/2025/09/12/googles-top-ai-scientist-says-learning-how-to-learn-will-be-next-generations-most-needed-skill/",
       "image": "/assets/uploads/chatgpt-image-2025년-10월-2일-오전-11_14_04.webp",
-      "pin": true
+      "pin": false
     }
   ]
 }
